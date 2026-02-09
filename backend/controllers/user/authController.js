@@ -1,10 +1,13 @@
-const User=require('../../models/User');
+const User=require('../../models/User'); //import user Schema
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 
+
+//register the user
+//api :- api/user/register
 exports.registerUser=async(req,res)=>{
     try{
-        const{name,email,password}=req.body;
+        const{name,email,password}=req.body; 
 
         const userExist=await User.findOne({email});
         
@@ -28,6 +31,9 @@ exports.registerUser=async(req,res)=>{
     }
 }
 
+
+//login a user
+//api:- api/user/login
 exports.loginUser=async(req,res)=>{
     try{
         const{email,password}=req.body;
@@ -72,3 +78,5 @@ exports.loginUser=async(req,res)=>{
         });
     }
 }
+
+//get user profile
