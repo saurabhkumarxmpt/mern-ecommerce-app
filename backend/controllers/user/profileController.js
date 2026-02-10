@@ -10,6 +10,25 @@ exports.getProfile=async(req,res)=>{
             user
         });
     }catch(err){
-        res.status(500).json({message:err.message})
+        res.status(500).json({message:err.message});
+    }
+}
+
+exports.updateProfile=async(req,res)=>{
+    try{
+        const userId=req.user.id;
+
+        const updateUser=await User.findByIdAndUpdate(
+            userId,
+            req.body,
+            {new:true}
+        ).select("-password");
+
+        res.status(200).json({
+            message:"Profile updated successfully",
+            user:updateUser
+        })
+    }catch(err){
+            res.status(500).json({message:err.message});
     }
 }
