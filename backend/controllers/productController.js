@@ -1,15 +1,16 @@
 const Product=require('../models/Product');
 
-
 //create a new product
 exports.createProduct=async(req,res)=>{
     try{
+
+        const images=req.files.map((file) =>  file.path);
+
         const{
             name,
             description,
             price,
             category,
-            images,
             stock,
             tags
         }=req.body;

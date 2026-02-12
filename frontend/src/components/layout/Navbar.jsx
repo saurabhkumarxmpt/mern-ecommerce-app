@@ -4,7 +4,7 @@ import logo from "../../assets/logo.png";
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-white sticky top-0 z-50 py-4 px-[160px] flex items-center justify-between">
+    <nav className="w-full bg-white sticky top-0 z-50 py-4 px-[80px] flex items-center justify-between">
       
       {/* Left - Logo */}
       <div className="flex items-center">
