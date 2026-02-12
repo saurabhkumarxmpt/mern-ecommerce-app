@@ -1,6 +1,7 @@
 import React from "react";
 import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
 import logo from "../../assets/logo.png";
+import {Link} from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -8,7 +9,9 @@ const Navbar = () => {
       
       {/* Left - Logo */}
       <div className="flex items-center">
+        <Link to='/'>
         <img src={logo} alt="Logo" className="h-10" />
+        </Link>
       </div>
 
       {/* Center - Tabs */}
@@ -31,7 +34,9 @@ const Navbar = () => {
       <div className="flex items-center space-x-6 text-lg text-gray-700">
         <FaSearch className="cursor-pointer hover:text-green-600 transition duration-300" />
         <FaShoppingCart className="cursor-pointer hover:text-green-600 transition duration-300" />
+        <Link to='/register'>
         <FaUser className="cursor-pointer hover:text-green-600 transition duration-300" />
+        </Link>
       </div>
 
     </nav>

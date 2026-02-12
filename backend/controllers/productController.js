@@ -64,12 +64,12 @@ exports.getHomePageProducts=async(req,res)=>{
     try{
         const featured =await Product.find({isFeatured: true})
         .limit(6)
-        .select("name price images");
+        .select("name price images category");
         
         const latest=await Product.find()
         .sort({createdAt: -1 })
         .limit(6)
-        .select("name price images");
+        .select("name price images category");
 
         res.status(200).json({
             featured,
