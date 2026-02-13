@@ -102,3 +102,31 @@ exports.getSingleProduct=async(req,res)=>{
         res.status(500).json({message:err.message});
     }
 }
+
+exports.getProducts=async(req,res)=>{
+    try{
+        const {search}=req.query;
+
+        let filter={};
+
+        if(search){
+            filter={
+                $or:[
+                    { name: { $regex: search, $options: "i" } },
+                    { category: { $regex: search, $options: "i" } },
+                    { tags: { $regex: search, $options: "i" } }
+                ]
+            };
+        }
+
+        const products=await Product.find(filter);
+
+        res.status(200).json({
+            count:products.length,
+            products
+        });
+
+    }catch(err){
+        res.status(500).json({message:err.message})
+    }
+}
