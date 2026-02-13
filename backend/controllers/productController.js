@@ -11,6 +11,7 @@ exports.createProduct=async(req,res)=>{
             description,
             price,
             category,
+            isFeatured,
             stock,
             tags
         }=req.body;
@@ -26,6 +27,7 @@ exports.createProduct=async(req,res)=>{
             description,
             price,
             category,
+            isFeatured,
             images,
             stock,
             tags
@@ -63,12 +65,12 @@ exports.getProductsByCategory=async(req,res)=>{
 exports.getHomePageProducts=async(req,res)=>{
     try{
         const featured =await Product.find({isFeatured: true})
-        .limit(6)
+        .limit(8)
         .select("name price images category");
         
         const latest=await Product.find()
         .sort({createdAt: -1 })
-        .limit(6)
+        .limit(4)
         .select("name price images category");
 
         res.status(200).json({
