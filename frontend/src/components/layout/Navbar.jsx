@@ -61,11 +61,11 @@ const Navbar = () => {
             </button>
           </form>
 
-          <FaShoppingCart className="cursor-pointer hover:text-green-600 transition duration-300" />
 
           <Link to="/register">
             <FaUser className="cursor-pointer hover:text-green-600 transition duration-300" />
           </Link>
+          <FaShoppingCart className="cursor-pointer hover:text-green-600 transition duration-300" />
         </div>
       </div>
     </nav>

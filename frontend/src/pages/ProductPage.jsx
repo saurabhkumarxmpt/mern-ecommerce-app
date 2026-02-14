@@ -1,6 +1,83 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { GetProducts } from "../services/ProductServices";
+import FilterSidebar from "../components/Productspage/FilterSidebar";
+import RightSection from "../components/Productspage/productLayout/RightSection";
+
+const demoProducts = [
+  {
+    _id: 1,
+    name: "Nike Shoes",
+    price: 1999,
+    rating: 4.5,
+    category: "Shoes",
+    image: "https://via.placeholder.com/300",
+  },
+  {
+    _id: 2,
+    name: "Smart Watch",
+    price: 2999,
+    rating: 4.2,
+    category: "Electronics",
+    image: "https://via.placeholder.com/300",
+  },
+  {
+    _id: 2,
+    name: "Smart Watch",
+    price: 2999,
+    rating: 4.2,
+    category: "Electronics",
+    image: "https://via.placeholder.com/300",
+  },
+  {
+    _id: 2,
+    name: "Smart Watch",
+    price: 2999,
+    rating: 4.2,
+    category: "Electronics",
+    image: "https://via.placeholder.com/300",
+  },
+  {
+    _id: 2,
+    name: "Smart Watch",
+    price: 2999,
+    rating: 4.2,
+    category: "Electronics",
+    image: "https://via.placeholder.com/300",
+  },
+  {
+    _id: 2,
+    name: "Smart Watch",
+    price: 2999,
+    rating: 4.2,
+    category: "Electronics",
+    image: "https://via.placeholder.com/300",
+  },
+  {
+    _id: 2,
+    name: "Smart Watch",
+    price: 2999,
+    rating: 4.2,
+    category: "Electronics",
+    image: "https://via.placeholder.com/300",
+  },
+  {
+    _id: 2,
+    name: "Smart Watch",
+    price: 2999,
+    rating: 4.2,
+    category: "Electronics",
+    image: "https://via.placeholder.com/300",
+  },
+  {
+    _id: 2,
+    name: "Smart Watch",
+    price: 2999,
+    rating: 4.2,
+    category: "Electronics",
+    image: "https://via.placeholder.com/300",
+  },
+];
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -21,22 +98,35 @@ const ProductsPage = () => {
     fetchProducts();
   }, [search]);
 
-  return (
-    <div className="p-10">
-      <h2 className="text-2xl font-semibold mb-6">
-        Products {search && `for "${search}"`}
-      </h2>
+   const [filters, setFilters] = useState({
+    category: "",
+    price: 10000,
+    rating: "",
+    inStock: false,
+  });
 
-      <div className="grid grid-cols-4 gap-6">
-        {products.map((item) => (
-          <div key={item._id} className="border p-4 rounded">
-            <img src={item.images[0]} alt="" className="h-40 w-full object-cover" />
-            <h3 className="mt-2 font-medium">{item.name}</h3>
-            <p className="text-green-600 font-semibold">₹{item.price}</p>
-          </div>
-        ))}
+  const clearFilters = () => {
+    setFilters({
+      category: "",
+      price: 10000,
+      rating: "",
+      inStock: false,
+    });
+  };
+
+  return (
+    <>
+    <div className="max-w-7xl p-4">
+      <div className="flex items-start gap-6">
+    <FilterSidebar
+        filters={filters}
+        setFilters={setFilters}
+        clearFilters={clearFilters}
+      />
+      <RightSection products={demoProducts}/>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 
