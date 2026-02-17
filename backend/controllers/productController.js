@@ -103,6 +103,7 @@ exports.getSingleProduct=async(req,res)=>{
     }
 }
 
+ // Get Products via user search
 exports.getProducts=async(req,res)=>{
     try{
         const {search}=req.query;

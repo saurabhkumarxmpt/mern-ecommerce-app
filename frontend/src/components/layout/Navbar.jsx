@@ -10,7 +10,7 @@ const Navbar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (search.trim()) {
-      navigate(`/product?search=${search}`);
+      navigate(`/products?search=${search}`);
       setSearch("");
     }
   };

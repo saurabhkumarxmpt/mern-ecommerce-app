@@ -4,7 +4,7 @@ import Layout from '../components/layout/UserLayout';
 
 import HomePage from '../pages/Home';
 import SignUp from '../features/auth/pages/Register';
-import ProductsPage from '../pages/ProductPage';
+import ProductListning from '../pages/ProductListning';
 
 const AppRoutes=()=>{
     return(
@@ -13,8 +13,7 @@ const AppRoutes=()=>{
 
                 <Route index element={<HomePage/>} />
                 <Route path='/register' element={<SignUp/>} />
-                <Route path='/product' element={<ProductsPage/>} />
-            
+                <Route path='/products' element={<ProductListning/>} />
             </Route>
         </Routes>
     )
