@@ -20,7 +20,7 @@ const FilterSidebar = ({ filters, setFilters, clearFilters }) => {
 
   return (
     <aside className="w-72 hidden lg:block">
-      <div className="sticky top-24 bg-gray-50 border border-gray-200  rounded-sm p-5 space-y-6">
+      <div className="sticky top-18 bg-gray-50 border border-gray-200  rounded-sm p-5 space-y-6">
 
         {/* Title */}
         <h2 className="text-lg font-semibold text-green-600">Filters</h2>
