@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams,useNavigate } from "react-router-dom";
 import { GetProducts } from "../services/ProductServices";
 import FilterSidebar from "../components/productListning/FilterSidebar";
 import ProductGrid from "../components/productListning/ProductGrid";
