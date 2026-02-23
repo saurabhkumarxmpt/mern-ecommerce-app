@@ -1,10 +1,17 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 
-// const categories = ["Men", "Women", "Electronics", "Shoes", "Accessories"];
 const brands = ["Nike", "Adidas", "Puma", "Apple", "Samsung"];
 const ratings = [4, 3, 2, 1];
 
 const FilterSidebar = ({ filters, setFilters, clearFilters,categories }) => {
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleCategoryChange=(category)=>{
+    searchParams.set("category",category);
+    setSearchParams(searchParams);
+  }
 
   const handleCategory = (cat) => {
     setFilters({ ...filters, category: cat });
@@ -32,7 +39,7 @@ const FilterSidebar = ({ filters, setFilters, clearFilters,categories }) => {
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => handleCategory(cat)}
+                onClick={() => handleCategoryChange(cat)}
                 className={`block w-full text-left px-3 py-2 rounded-md text-sm ${
                   filters.category === cat
                     ? "bg-green-600 text-white"
