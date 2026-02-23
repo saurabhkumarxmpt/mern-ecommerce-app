@@ -106,21 +106,29 @@ exports.getSingleProduct=async(req,res)=>{
  // Get Products via user search
 exports.getProducts=async(req,res)=>{
     try{
-        const {search}=req.query;
+        const {search,category,min,max,sort,tag}=req.query;
 
         let filter={};
 
-        if(search){
-            filter={
-                $or:[
-                    { name: { $regex: search, $options: "i" } },
-                    { category: { $regex: search, $options: "i" } },
-                    { tags: { $regex: search, $options: "i" } }
-                ]
-            };
+        if (search) {
+            filter.$or = [
+                { name: { $regex: search, $options: "i" } },
+                { tags: { $regex: search, $options: "i" } }
+        ];
         }
 
-        const products=await Product.find(filter);
+        if (category) filter.category = category;
+        if (tag) filter.tags = tag;
+
+        if (min && max) {
+            filter.price = { $gte: Number(min), $lte: Number(max) };
+        }
+
+        let sortOption = {};
+        if (sort === "low") sortOption.price = 1;
+        if (sort === "high") sortOption.price = -1;
+
+        const products=await Product.find(filter).sort(sortOption);
 
         res.status(200).json({
             count:products.length,

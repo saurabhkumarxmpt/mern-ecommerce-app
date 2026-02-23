@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef,useState,useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Category } from "../../services/CategoryServices";
 
 const categories = [
   { id: 1, name: "Electronics", emoji: "📱" },
@@ -16,6 +17,8 @@ const categories = [
 const CategorySection = () => {
   const scrollRef = useRef(null);
 
+  const[category,setCategory]=useState([]);
+
   const scroll = (direction) => {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({
@@ -24,6 +27,20 @@ const CategorySection = () => {
       });
     }
   };
+
+  const fetchedCategory=async()=>{
+    try{
+        const category=await Category();
+        setCategory(category);
+        console.log(category);
+    }catch(err){
+      console.log(err);
+    }
+  };
+
+  useEffect(()=>{
+    fetchedCategory();
+  },[]);
 
   return (
     <section className="py-20 bg-gray-50">

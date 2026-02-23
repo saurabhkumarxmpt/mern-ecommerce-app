@@ -1,6 +1,7 @@
 import API from './Api';
 
-export const GetProducts=async(search="")=>{
-    const response=await API.get(search ? `/product?search=${search}` : `/product`);
+export const GetProducts=async(params={})=>{
+    const quiryString=new URLSearchParams(params).toString();
+    const response=await API.get(`/product?${quiryString}`);
     return response.data.products;
 };

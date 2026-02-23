@@ -7,16 +7,27 @@ import ProductGrid from "../components/productListning/ProductGrid";
 const ProductListning=()=>{
 
     const[products,setProducts]=useState([]);
-    const [searchParams]= useSearchParams();
+    const [searchParams,setSearchParams]= useSearchParams();
     const[filters,setFilters]=useState({});
-    const [sortBy, setSortBy] = useState("");
 
 
-    const search=searchParams.get("search")  || "";
+    const search = searchParams.get("search") || "";
+    const category = searchParams.get("category") || "";
+    const sort = searchParams.get("sort") || "";
+    const min = searchParams.get("min") || "";
+    const max = searchParams.get("max") || "";
+    const tag = searchParams.get("tag") || "";
  
     const fetchProducts=async()=>{
         try{
-            const data=await GetProducts(search);
+            const data=await GetProducts({
+                search,
+                category,
+                sort,
+                min,
+                max,
+                tag
+            });
             setProducts(data);
             console.info(data);
         }catch(err){
@@ -26,7 +37,7 @@ const ProductListning=()=>{
 
     useEffect(()=>{
         fetchProducts()
-    },[search]);
+    },[searchParams]);
 
     const clearFilters=()=>{
         setFilters({});
@@ -49,13 +60,16 @@ const ProductListning=()=>{
                     </p>
 
                     <select
-                        value={sortBy}
-                        onChange={(e) => setSortBy(e.target.value)}
+                        value={sort}
+                        onChange={(e) => {
+                            searchParams.set("sort",e.target.value);
+                            setSearchParams(searchParams);
+                        }}
                         className="border px-1 py-1 rounded-sm border-gray-200 text-gray-700 text-sm outline-0"
                     >
                         <option value="">Sort By</option>
-                        <option value="low-high">Price: Low → High</option>
-                        <option value="high-low">Price: High → Low</option>
+                        <option value="low">Price: Low → High</option>
+                        <option value="high">Price: High → Low</option>
                     </select>
 
                 </div>
