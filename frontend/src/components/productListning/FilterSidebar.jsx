@@ -46,7 +46,7 @@ const FilterSidebar = ({ filters, setFilters, clearFilters,categories }) => {
                     : "hover:bg-gray-100"
                 }`}
               >
-                {cat}
+                {cat._id} ({cat.count})
               </button>
             ))}
           </div>

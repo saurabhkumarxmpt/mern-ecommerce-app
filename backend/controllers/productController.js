@@ -113,7 +113,8 @@ exports.getProducts=async(req,res)=>{
         if (search) {
             filter.$or = [
                 { name: { $regex: search, $options: "i" } },
-                { tags: { $regex: search, $options: "i" } }
+                { tags: { $regex: search, $options: "i" } },
+                { category: {$regex: search, $options: "i"} }
         ];
         }
 
@@ -130,9 +131,20 @@ exports.getProducts=async(req,res)=>{
 
         const products=await Product.find(filter).sort(sortOption);
 
+        const categories = await Product.aggregate([
+            {$match:filter },
+            {
+                $group:{
+                    _id:"$category",
+                    count:{$sum:1}
+                }
+            }
+        ]);
+
         res.status(200).json({
             count:products.length,
-            products
+            products,
+            categories
         });
 
     }catch(err){

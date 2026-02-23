@@ -8,6 +8,7 @@ import ProductGrid from "../components/productListning/ProductGrid";
 const ProductListning=()=>{
 
     const[products,setProducts]=useState([]);
+    const[productsCategory,setProductsCategory]=useState([]);
     const [searchParams,setSearchParams]= useSearchParams();
     const[filters,setFilters]=useState({});
 
@@ -28,7 +29,8 @@ const ProductListning=()=>{
                 max,
                 tag
             });
-            setProducts(data);
+            setProducts(data.products);
+            setProductsCategory(data.categories);
             console.info(data);
         }catch(err){
             console.error(err)
@@ -43,8 +45,7 @@ const ProductListning=()=>{
         setFilters({});
     }
 
-    const uniqueCategories =[...new Set(products.map(p => p.category))];
-
+    console.log(productsCategory);
     return(
         <>
         <div className="flex gap-6">
@@ -52,13 +53,13 @@ const ProductListning=()=>{
             filters={filters}
             setFilters={setFilters}
             clearFilters={clearFilters}
-            categories={uniqueCategories}
+            categories={productsCategory}
             />
             <div className="flex-1">
                 <div className="flex justify-between items-center mb-4 px-10 pt-8">
 
                     <p className="text-gray-600 text-md">
-                        Showing <span className="font-semibold text-green-600">{products.length}</span> products
+                        Showing <span className="font-semibold text-green-600">1</span> products
                     </p>
 
                     <select
