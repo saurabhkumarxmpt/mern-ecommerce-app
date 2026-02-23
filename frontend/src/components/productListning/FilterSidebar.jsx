@@ -1,10 +1,10 @@
 import React from "react";
 
-const categories = ["Men", "Women", "Electronics", "Shoes", "Accessories"];
+// const categories = ["Men", "Women", "Electronics", "Shoes", "Accessories"];
 const brands = ["Nike", "Adidas", "Puma", "Apple", "Samsung"];
 const ratings = [4, 3, 2, 1];
 
-const FilterSidebar = ({ filters, setFilters, clearFilters }) => {
+const FilterSidebar = ({ filters, setFilters, clearFilters,categories }) => {
 
   const handleCategory = (cat) => {
     setFilters({ ...filters, category: cat });

@@ -1,6 +1,7 @@
 import { useEffect,useState } from "react";
 import { useSearchParams,useNavigate } from "react-router-dom";
 import { GetProducts } from "../services/ProductServices";
+import { Category } from "../services/CategoryServices";
 import FilterSidebar from "../components/productListning/FilterSidebar";
 import ProductGrid from "../components/productListning/ProductGrid";
 
@@ -10,14 +11,13 @@ const ProductListning=()=>{
     const [searchParams,setSearchParams]= useSearchParams();
     const[filters,setFilters]=useState({});
 
-
     const search = searchParams.get("search") || "";
     const category = searchParams.get("category") || "";
     const sort = searchParams.get("sort") || "";
     const min = searchParams.get("min") || "";
     const max = searchParams.get("max") || "";
     const tag = searchParams.get("tag") || "";
- 
+
     const fetchProducts=async()=>{
         try{
             const data=await GetProducts({
@@ -43,6 +43,7 @@ const ProductListning=()=>{
         setFilters({});
     }
 
+    const uniqueCategories =[...new Set(products.map(p => p.category))];
 
     return(
         <>
@@ -51,6 +52,7 @@ const ProductListning=()=>{
             filters={filters}
             setFilters={setFilters}
             clearFilters={clearFilters}
+            categories={uniqueCategories}
             />
             <div className="flex-1">
                 <div className="flex justify-between items-center mb-4 px-10 pt-8">
