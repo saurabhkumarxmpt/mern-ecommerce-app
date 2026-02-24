@@ -5,6 +5,7 @@ import Layout from '../components/layout/UserLayout';
 import HomePage from '../pages/Home';
 import SignUp from '../features/auth/pages/Register';
 import ProductListning from '../pages/ProductListning';
+import ProductDetails from '../pages/ProductDetail';
 
 const AppRoutes=()=>{
     return(
@@ -14,6 +15,7 @@ const AppRoutes=()=>{
                 <Route index element={<HomePage/>} />
                 <Route path='/register' element={<SignUp/>} />
                 <Route path='/products' element={<ProductListning/>} />
+                <Route path='/products/:id' element={<ProductDetails/>} />
             </Route>
         </Routes>
     )
