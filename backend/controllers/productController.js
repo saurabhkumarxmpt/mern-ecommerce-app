@@ -130,21 +130,9 @@ exports.getProducts=async(req,res)=>{
         if (sort === "high") sortOption.price = -1;
 
         const products=await Product.find(filter).sort(sortOption);
-
-        const categories = await Product.aggregate([
-            {$match:filter },
-            {
-                $group:{
-                    _id:"$category",
-                    count:{$sum:1}
-                }
-            }
-        ]);
-
         res.status(200).json({
             count:products.length,
-            products,
-            categories
+            products
         });
 
     }catch(err){
