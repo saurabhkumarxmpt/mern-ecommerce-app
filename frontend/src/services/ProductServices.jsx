@@ -10,7 +10,7 @@ export const GetProducts=async(params={})=>{
 export const GetSingleProduct=async(id)=>{
     try{
         const response=await API.get(`/product/${id}`);
-        return response;
+        return response.data;
     } catch(err){
         console.error(err)
         throw err;
