@@ -139,3 +139,21 @@ exports.getProducts=async(req,res)=>{
         res.status(500).json({message:err.message})
     }
 }
+
+exports.relatedProducts=async(req,res)=>{
+    const {id}=req.params;
+
+    const currentProduct=await Product.findById(id);
+
+    if(!currentProduct){
+        return res.status(404).json({message:"product not found"});
+    }
+
+    const relatedProducts=await Product.find({
+        _id:{$ne: id},
+        category:currentProduct.category,
+        tags:{$in:currentProduct.tags}
+    }).limit(6);
+
+    res.json(relatedProducts);
+}

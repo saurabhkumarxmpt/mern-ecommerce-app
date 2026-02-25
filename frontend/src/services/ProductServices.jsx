@@ -16,3 +16,13 @@ export const GetSingleProduct=async(id)=>{
         throw err;
     }
 }
+
+export const GetRelatedProducts=async(id)=>{
+    try{
+        const response=await API.get(`/product/related/${id}`);
+        return response.data
+    }catch(err){
+        console.error(err);
+        throw err;
+    }
+}

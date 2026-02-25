@@ -4,7 +4,7 @@ const ProductDescription = ({ product, selectedImage }) => {
   if (!product) return null;
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-16">
+    <div className="max-w-6xl mx-auto px-4 py-16">
 
       {/* Section Heading */}
       <div className="text-center mb-12">
