@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { GetSingleProduct } from "../services/ProductServices";
 import ProductBreadcrumb from "../components/productdetails/ProductBreadcrumb";
 import ProductImages from "../components/productdetails/ProductImages";
+import RightSideDetails from "../components/productdetails/RightSideDetails";
+import ProductDescription from "../components/productdetails/ProductDescription";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
@@ -38,18 +40,15 @@ const ProductDetails = () => {
         setSelectedImage={setSelectedImage}
         />
 
-  {/* RIGHT SIDE DETAILS */}
-  <div className="space-y-5 border">
-    <h1 className="text-3xl font-bold">{product.name}</h1>
-    <p className="text-gray-500">Category: {product.category}</p>
-    <p className="text-2xl font-semibold text-green-600">
-      ₹{product.price}
-    </p>
-    <p>{product.description}</p>
-  </div>
-
-</div>
-
+      {/* RIGHT SIDE DETAILS */}
+        <RightSideDetails 
+        product={product}
+        />
+    </div>
+    <ProductDescription
+    product={product}
+    selectedImage={selectedImage}
+    />
 </>
   );
 };
