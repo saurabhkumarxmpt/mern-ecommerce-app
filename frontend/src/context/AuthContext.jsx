@@ -7,19 +7,21 @@ export const AuthProvider=({children})=>{
     const[user,setUser]=useState(null);
 
     useEffect(()=>{
-        const token=localStorage.getItem("token");
-        if(token){
-            setUser({token})
+        const storedUser=localStorage.getItem("user");
+        if(storedUser){
+            setUser(JSON.stringify(storedUser));
         }
     },[]);
 
     const login=(userData)=>{
         localStorage.setItem("token",userData.token);
-        setUser(userData)
+        localStorage.setItem("user",JSON.stringify(userData.user));
+        setUser(userData.user)
     };
 
     const logout=()=>{
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
         setUser(null);
     }
 
