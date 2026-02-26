@@ -59,14 +59,14 @@ const ProductDetails = () => {
         product={product}
         />
     </div>
-    <ProductDescription
-    product={product}
-    selectedImage={selectedImage}
-    />
-    <TrustBanner/>
-    <RelatedProducts
-    products={relatedProducts}
-    />
+      <ProductDescription
+        product={product}
+        selectedImage={selectedImage}
+      />
+      <TrustBanner/>
+      <RelatedProducts
+        products={relatedProducts}
+      />
 </>
   );
 };

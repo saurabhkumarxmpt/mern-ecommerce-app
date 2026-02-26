@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useCart } from "../../context/CartContext";
 
 const RightSideDetails = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -7,6 +8,8 @@ const RightSideDetails = ({ product }) => {
   const decreaseQty = () => {
     if (quantity > 1) setQuantity((prev) => prev - 1);
   };
+
+  const {addToCart} = useCart();
 
   return (
     <div className="space-y-6 py-6">
@@ -93,7 +96,9 @@ const RightSideDetails = ({ product }) => {
 
       {/* Buttons */}
       <div className="flex gap-4 pt-4">
-  <button className="flex-1 px-6 py-3 bg-green-600 text-white text-sm font-medium rounded-lg shadow hover:bg-green-700 transition">
+  <button 
+  onClick={()=> addToCart(product,1)}
+  className="flex-1 px-6 py-3 bg-green-600 text-white text-sm font-medium rounded-lg shadow hover:bg-green-700 transition">
     Add to Cart
   </button>
 

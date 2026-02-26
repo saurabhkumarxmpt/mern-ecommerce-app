@@ -153,7 +153,7 @@ exports.relatedProducts=async(req,res)=>{
         _id:{$ne: id},
         category:currentProduct.category,
         tags:{$in:currentProduct.tags}
-    }).limit(6);
+    }).limit(8);
 
     res.json(relatedProducts);
 }
