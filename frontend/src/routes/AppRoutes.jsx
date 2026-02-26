@@ -9,6 +9,7 @@ import ProductListning from '../pages/ProductListning';
 import ProductDetails from '../pages/ProductDetail';
 import CartPage from '../pages/CartPage';
 import CheckoutPage from '../pages/CheckOutPage';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 const AppRoutes=()=>{
     return(
@@ -20,7 +21,7 @@ const AppRoutes=()=>{
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/products' element={<ProductListning/>} />
                 <Route path='/cart' element={<CartPage/>} />
-                <Route path='/checkout' element={<CheckoutPage/>} />
+                <Route path='/checkout' element={<ProtectedRoute><CheckoutPage/></ProtectedRoute>} />
                 <Route path='/products/:id' element={<ProductDetails/>} />
             </Route>
         </Routes>

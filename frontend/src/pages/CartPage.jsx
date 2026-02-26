@@ -13,6 +13,10 @@ const CartPage = () => {
     clearCart,
   } = useCart();
 
+  const handleCheckout=()=>{
+    
+  }
+
   if (cart.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-[65vh] text-center">
@@ -118,9 +122,11 @@ const CartPage = () => {
             </span>
           </div>
 
+          <Link to="/checkout">
           <button className="w-full bg-green-600 hover:bg-green-700 transition text-white py-2 text-sm rounded-sm mb-3">
             Proceed to Checkout
           </button>
+          </Link>
 
           <button
             onClick={clearCart}

@@ -64,7 +64,7 @@ const Navbar = () => {
           </form>
 
 
-          <Link to="/register">
+          <Link to="/login">
             <FaUser className="cursor-pointer hover:text-green-600 transition duration-300" size={20} />
           </Link>
          <button

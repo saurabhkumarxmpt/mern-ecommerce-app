@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import { loginUser } from "../../../services/AuthService";
+import { useAuth } from "../../../context/AuthContext";
 
 const Login = () => {
+
+  const navigate=useNavigate();
+  const {login}=useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -14,10 +19,18 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(formData);
-    // yaha backend login API call lagegi
+    try{
+      const data=await loginUser(formData);
+      login(data);
+      console.log("login sucess");
+      alert("login");
+      navigate('/');
+    }catch(err){
+      console.error(err);
+    }
+    
   };
 
   return (
