@@ -9,7 +9,12 @@ const RightSideDetails = ({ product }) => {
     if (quantity > 1) setQuantity((prev) => prev - 1);
   };
 
-  const {addToCart} = useCart();
+  const {addToCart,setIsMiniCartOpen } = useCart();
+
+  const handleAddToCart = () => {
+  addToCart(product, quantity);
+  setIsMiniCartOpen(true); // ye App se pass karna hoga
+};
 
   return (
     <div className="space-y-6 py-6">
@@ -97,7 +102,8 @@ const RightSideDetails = ({ product }) => {
       {/* Buttons */}
       <div className="flex gap-4 pt-4">
   <button 
-  onClick={()=> addToCart(product,1)}
+  onClick={handleAddToCart}
+  
   className="flex-1 px-6 py-3 bg-green-600 text-white text-sm font-medium rounded-lg shadow hover:bg-green-700 transition">
     Add to Cart
   </button>

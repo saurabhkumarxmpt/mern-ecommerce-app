@@ -4,6 +4,8 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
 
+    const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
+
   // ✅ 1. Load cart from localStorage on first render
   const [cart, setCart] = useState(() => {
     try {
@@ -89,6 +91,8 @@ export const CartProvider = ({ children }) => {
         clearCart,
         totalPrice,
         totalItems,
+        isMiniCartOpen,
+        setIsMiniCartOpen
       }}
     >
       {children}

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import logo from "../../assets/logo.png";
+import { useCart } from "../../context/CartContext";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
+  const { totalItems,setIsMiniCartOpen  } = useCart();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -65,7 +67,18 @@ const Navbar = () => {
           <Link to="/register">
             <FaUser className="cursor-pointer hover:text-green-600 transition duration-300" />
           </Link>
-          <FaShoppingCart className="cursor-pointer hover:text-green-600 transition duration-300" />
+         <button
+        onClick={() => setIsMiniCartOpen(true)}
+        className="relative"
+      >
+        <FaShoppingCart size={24} />
+
+        {totalItems > 0 && (
+          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-[2px] rounded-full">
+            {totalItems}
+          </span>
+        )}
+      </button>
         </div>
       </div>
     </nav>
