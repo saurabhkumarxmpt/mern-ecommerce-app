@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const SignUp = () => {
+const Login = () => {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
   });
@@ -18,6 +17,7 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    // yaha backend login API call lagegi
   };
 
   return (
@@ -25,20 +25,17 @@ const SignUp = () => {
       
       {/* Left Section */}
       <div className="hidden md:flex w-1/2 relative bg-gradient-to-br from-green-700 via-green-600 to-emerald-500 text-white items-center justify-center p-16">
-
-        {/* Soft overlay for depth */}
+        
         <div className="absolute inset-0 bg-black/10"></div>
 
         <div className="relative max-w-md">
           <h1 className="text-4xl font-bold leading-tight mb-6">
-            Shop Smarter 💚
+            Welcome Back 💚
           </h1>
           <p className="text-lg text-green-100 leading-relaxed">
-            Create your account to enjoy fast checkout, order tracking,
-            secure payments and exclusive offers.
+            Login to access your cart, track orders and enjoy secure checkout.
           </p>
 
-          {/* Feature points */}
           <div className="mt-10 space-y-3 text-green-100 text-sm">
             <p>✔ Secure Payments</p>
             <p>✔ Fast Delivery</p>
@@ -53,25 +50,10 @@ const SignUp = () => {
         <div className="w-full max-w-md bg-white p-8 rounded-sm shadow-lg border border-gray-200">
           
           <h2 className="text-2xl font-semibold text-gray-800 text-center mb-6">
-            Create Account
+            Login to Your Account
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-5">
-
-            <div>
-              <label className="block text-sm mb-1 text-gray-600">
-                Full Name
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Enter your name"
-                className="w-full border border-gray-300 rounded-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 transition"
-                required
-              />
-            </div>
 
             <div>
               <label className="block text-sm mb-1 text-gray-600">
@@ -103,22 +85,37 @@ const SignUp = () => {
               />
             </div>
 
+            {/* Remember + Forgot */}
+            <div className="flex items-center justify-between text-sm">
+              <label className="flex items-center gap-2 text-gray-600">
+                <input type="checkbox" className="accent-green-600" />
+                Remember me
+              </label>
+
+              <Link
+                to="/forgot-password"
+                className="text-green-600 hover:underline"
+              >
+                Forgot password?
+              </Link>
+            </div>
+
             <button
               type="submit"
               className="w-full bg-green-600 text-white py-2 rounded-sm hover:bg-green-700 transition duration-300 font-medium"
             >
-              Create Account
+              Login
             </button>
 
           </form>
 
           <p className="text-sm text-center text-gray-500 mt-5">
-            Already have an account?{" "}
+            Don’t have an account?{" "}
             <Link
-              to="/login"
+              to="/register"
               className="text-green-600 hover:underline font-medium"
             >
-              Login
+              Sign Up
             </Link>
           </p>
 
@@ -129,4 +126,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
