@@ -65,18 +65,18 @@ const Navbar = () => {
 
 
           <Link to="/register">
-            <FaUser className="cursor-pointer hover:text-green-600 transition duration-300" />
+            <FaUser className="cursor-pointer hover:text-green-600 transition duration-300" size={20} />
           </Link>
          <button
         onClick={() => setIsMiniCartOpen(true)}
         className="relative"
-      >
-        <FaShoppingCart size={24} />
+        >
+          <FaShoppingCart size={20} />
 
-        {totalItems > 0 && (
-          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-[2px] rounded-full">
-            {totalItems}
-          </span>
+          {totalItems > 0 && (
+            <span className="absolute -top-3 -right-3 bg-green-600 text-white text-[10px] px-2 py-[2px] rounded-full">
+              {totalItems}
+            </span>
         )}
       </button>
         </div>

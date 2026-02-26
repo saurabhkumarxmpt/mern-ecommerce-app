@@ -7,6 +7,7 @@ import SignUp from '../features/auth/pages/Register';
 import ProductListning from '../pages/ProductListning';
 import ProductDetails from '../pages/ProductDetail';
 import CartPage from '../pages/CartPage';
+import CheckoutPage from '../pages/CheckOutPage';
 
 const AppRoutes=()=>{
     return(
@@ -17,6 +18,7 @@ const AppRoutes=()=>{
                 <Route path='/register' element={<SignUp/>} />
                 <Route path='/products' element={<ProductListning/>} />
                 <Route path='/cart' element={<CartPage/>} />
+                <Route path='/checkout' element={<CheckoutPage/>} />
                 <Route path='/products/:id' element={<ProductDetails/>} />
             </Route>
         </Routes>

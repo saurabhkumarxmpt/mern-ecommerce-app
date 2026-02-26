@@ -5,15 +5,11 @@ import { useState } from "react";
 import MiniCart from "../home/MiniCart";
 
 const Layout=()=>{
-
-    const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
+    
     return(
         <>
-        <Navbar setIsMiniCartOpen={setIsMiniCartOpen}/>
-        <MiniCart 
-        isOpen={isMiniCartOpen} 
-        setIsOpen={setIsMiniCartOpen}
-      />
+        <Navbar/>
+        <MiniCart/>
         <Outlet/>
         <Footer/>
         </>
