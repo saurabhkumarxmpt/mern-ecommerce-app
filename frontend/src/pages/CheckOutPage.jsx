@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const CheckoutPage = () => {
   const { cart, totalPrice, totalItems, clearCart } = useCart();
-  const { user } = useAuth();
+  const { user,token } = useAuth();
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -76,7 +76,7 @@ const CheckoutPage = () => {
         totalPrice,
       };
 
-      await createOrder(orderData, user.token);
+      await createOrder(orderData, token); 
 
       toast.success("Order Placed Successfully 🎉");
 

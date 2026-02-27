@@ -122,7 +122,7 @@ const Navbar = () => {
                     </Link>
 
                     <Link
-                      to="/orders"
+                      to="/my-orders"
                       className="block px-4 py-2 hover:bg-gray-50 transition"
                     >
                       My Orders
