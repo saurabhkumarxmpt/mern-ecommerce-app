@@ -13,9 +13,6 @@ const CartPage = () => {
     clearCart,
   } = useCart();
 
-  const handleCheckout=()=>{
-    
-  }
 
   if (cart.length === 0) {
     return (

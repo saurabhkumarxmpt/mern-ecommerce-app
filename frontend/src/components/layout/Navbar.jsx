@@ -42,8 +42,8 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Center Links */}
-        <div className="hidden md:flex w-2/4 justify-center space-x-14 text-gray-800 font-medium">
+        {/* Center Links - Slightly Left */}
+        <div className="hidden md:flex w-2/4 justify-start pl-20 space-x-12 text-gray-800 font-medium">
           {["Home", "Products", "About", "Contact"].map((item, index) => (
             <Link
               key={index}
@@ -64,7 +64,7 @@ const Navbar = () => {
           {/* Search */}
           <form
             onSubmit={handleSearch}
-            className="hidden md:flex items-center border rounded-sm px-2 py-1 bg-white"
+            className="hidden md:flex items-center border border-gray-200 rounded-sm px-3 py-1 bg-white"
           >
             <input
               type="text"
@@ -99,9 +99,9 @@ const Navbar = () => {
                 {/* User Button */}
                 <div className="flex items-center gap-2 cursor-pointer px-3 py-1 rounded-full hover:bg-gray-100 transition">
                   
-                  {/* Avatar Circle */}
-                  <div className="w-8 h-8 bg-green-600 text-white flex items-center justify-center rounded-full text-xs font-semibold uppercase">
-                    {user?.name?.charAt(0)}
+                  {/* Avatar */}
+                  <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-green-700 text-white flex items-center justify-center rounded-full text-xs font-semibold uppercase shadow">
+                    {user?.name?.charAt(0)?.toUpperCase() || "U"}
                   </div>
 
                   {/* Name */}

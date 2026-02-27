@@ -1,6 +1,7 @@
 import {Routes,Route} from 'react-router-dom';
 
 import Layout from '../components/layout/UserLayout';
+import { Toaster } from "react-hot-toast";
 
 import HomePage from '../pages/Home';
 import SignUp from '../features/auth/pages/Register';
@@ -13,6 +14,8 @@ import ProtectedRoute from '../components/ProtectedRoute';
 
 const AppRoutes=()=>{
     return(
+        <>
+        <Toaster position='top-right' reverseOrder={false} />
         <Routes>
             <Route path='/' element={<Layout/>}>
 
@@ -25,6 +28,7 @@ const AppRoutes=()=>{
                 <Route path='/products/:id' element={<ProductDetails/>} />
             </Route>
         </Routes>
+        </>
     )
 }
 

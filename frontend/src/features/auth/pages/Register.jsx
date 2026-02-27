@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import {registerUser} from "../../../services/AuthService.jsx";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
+
+  const navigate=useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,10 +19,36 @@ const SignUp = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const data = await registerUser(formData);
+
+    toast.success("User registered successfully ✅");
+    console.info(data);
+
+    navigate("/login");
+
+  } catch (err) {
+    console.error(err);
+
+    // ✅ Agar backend se response aaya hai
+    if (err.response && err.response.data) {
+      
+      if (err.response.status === 400) {
+        toast.error(err.response.data.message || "Email already exists ❌");
+      } 
+      
+      else {
+        toast.error("Something went wrong. Please try again.");
+      }
+
+    } else {
+      toast.error("Server error. Please try later.");
+    }
+  }
+};
 
   return (
     <div className="min-h-screen flex bg-gray-100">

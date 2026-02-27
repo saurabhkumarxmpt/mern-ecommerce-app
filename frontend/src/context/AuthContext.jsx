@@ -9,14 +9,15 @@ export const AuthProvider=({children})=>{
     useEffect(()=>{
         const storedUser=localStorage.getItem("user");
         if(storedUser){
-            setUser(JSON.stringify(storedUser));
+            setUser(JSON.parse(storedUser));
         }
     },[]);
 
     const login=(userData)=>{
         localStorage.setItem("token",userData.token);
         localStorage.setItem("user",JSON.stringify(userData.user));
-        setUser(userData.user)
+        setUser(userData.user);
+        console.log(userData.user);
     };
 
     const logout=()=>{

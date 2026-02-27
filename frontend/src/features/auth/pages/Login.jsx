@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import { loginUser } from "../../../services/AuthService";
 import { useAuth } from "../../../context/AuthContext";
+import toast from "react-hot-toast";
 
 const Login = () => {
 
@@ -25,7 +26,7 @@ const Login = () => {
       const data=await loginUser(formData);
       login(data);
       console.log("login sucess");
-      alert("login");
+      toast.success(`Welcome`);
       navigate('/');
     }catch(err){
       console.error(err);
