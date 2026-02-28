@@ -1,19 +1,16 @@
 import React, { useRef,useState,useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import {Link} from 'react-router-dom';
 import { Category } from "../../services/CategoryServices";
 
-const categories = [
-  { id: 1, name: "Electronics", emoji: "📱" },
-  { id: 2, name: "Fashion", emoji: "👗" },
-  { id: 3, name: "Shoes", emoji: "👟" },
-  { id: 4, name: "Beauty", emoji: "💄" },
-  { id: 5, name: "Books", emoji: "📚" },
-  { id: 6, name: "Sports", emoji: "⚽" },
-  { id: 6, name: "Sports", emoji: "⚽" },
-  { id: 6, name: "Sports", emoji: "⚽" },
-  { id: 6, name: "Sports", emoji: "⚽" },
-];
-
+const categoryIcons = {
+  I_phone: "📱",
+  men: "👗",
+  gaming: "👟",
+  Beauty: "💄",
+  Books: "📚",
+  Sports: "⚽",
+};
 const CategorySection = () => {
   const scrollRef = useRef(null);
 
@@ -31,7 +28,7 @@ const CategorySection = () => {
   const fetchedCategory=async()=>{
     try{
         const category=await Category();
-        setCategory(category);
+        setCategory(category.category);
         console.log(category);
     }catch(err){
       console.log(err);
@@ -75,18 +72,20 @@ const CategorySection = () => {
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide"
         >
-          {categories.map((category) => (
+          {category.slice(0,8).map((cat) => (
+            <Link to={`/products?category=${cat.name}`}>
             <div
-              key={category.id}
-              className="min-w-[180px] border border-gray-200 bg-white rounded-lg shadow hover:shadow-md transition duration-300 p-6 text-center cursor-pointer hover:-translate-y-1"
+              key={cat._id}
+              className="min-w-[180px] border border-gray-200 bg-gray-100 rounded-sm shadow hover:shadow-md transition duration-300 p-6 text-center cursor-pointer hover:-translate-y-1"
             >
               <div className="text-5xl mb-4 transition-transform duration-300 hover:scale-110">
-                {category.emoji}
+                {categoryIcons[cat.name] || "📦"}
               </div>
-              <h3 className="text-lg font-medium">
-                {category.name}
+              <h3 className="text-lg font-medium text-gray-700">
+                {cat.name}
               </h3>
             </div>
+            </Link>
           ))}
         </div>
       </div>

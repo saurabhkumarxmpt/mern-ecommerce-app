@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 const PromotionalBanner = () => {
   return (
@@ -18,7 +19,10 @@ const PromotionalBanner = () => {
               Limited time deal — shop your favorite products now.
             </p>
 
-            <button className="bg-green-600  text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-700 transition">
+            <button 
+            className="bg-green-600  text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-700 transition"
+            onClick={()=> toast.error(`Sorry not deal right now`)}
+            >
               Buy Now →
             </button>
           </div>

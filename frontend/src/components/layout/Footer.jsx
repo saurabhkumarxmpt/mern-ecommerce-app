@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   FaFacebookF,
   FaInstagram,
@@ -26,10 +27,26 @@ const Footer = () => {
         <div>
           <h3 className="text-white font-semibold mb-3">Quick Links</h3>
           <ul className="space-y-2 text-sm">
-            <li className="hover:text-white cursor-pointer">Home</li>
-            <li className="hover:text-white cursor-pointer">Shop</li>
-            <li className="hover:text-white cursor-pointer">Categories</li>
-            <li className="hover:text-white cursor-pointer">Contact</li>
+            <li>
+              <Link to="/" className="hover:text-white transition">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/products" className="hover:text-white transition">
+                Shop
+              </Link>
+            </li>
+            <li>
+              <Link to="/" className="hover:text-white transition">
+                Categories
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:text-white transition">
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -37,10 +54,26 @@ const Footer = () => {
         <div>
           <h3 className="text-white font-semibold mb-3">Customer Service</h3>
           <ul className="space-y-2 text-sm">
-            <li className="hover:text-white cursor-pointer">My Account</li>
-            <li className="hover:text-white cursor-pointer">Orders</li>
-            <li className="hover:text-white cursor-pointer">Wishlist</li>
-            <li className="hover:text-white cursor-pointer">Help Center</li>
+            <li>
+              <Link to="/profile" className="hover:text-white transition">
+                My Account
+              </Link>
+            </li>
+            <li>
+              <Link to="/my-orders" className="hover:text-white transition">
+                Orders
+              </Link>
+            </li>
+            <li>
+              <Link to="/wishlist" className="hover:text-white transition">
+                Wishlist
+              </Link>
+            </li>
+            <li>
+              <Link to="/help" className="hover:text-white transition">
+                Help Center
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -48,18 +81,41 @@ const Footer = () => {
         <div>
           <h3 className="text-white font-semibold mb-3">Follow Us</h3>
           <div className="flex gap-3">
-            <div className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition cursor-pointer">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noreferrer"
+              className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"
+            >
               <FaFacebookF />
-            </div>
-            <div className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-pink-500 transition cursor-pointer">
+            </a>
+
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noreferrer"
+              className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-pink-500 transition"
+            >
               <FaInstagram />
-            </div>
-            <div className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-sky-500 transition cursor-pointer">
+            </a>
+
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noreferrer"
+              className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-sky-500 transition"
+            >
               <FaTwitter />
-            </div>
-            <div className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition cursor-pointer">
+            </a>
+
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noreferrer"
+              className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition"
+            >
               <FaYoutube />
-            </div>
+            </a>
           </div>
         </div>
 
@@ -68,7 +124,7 @@ const Footer = () => {
       {/* BOTTOM FOOTER */}
       <div className="border-t border-gray-800">
         <div className="max-w-6xl mx-auto px-4 py-4 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} ECart. All rights reserved. | made by saurabh
+          © {new Date().getFullYear()} ECart. All rights reserved. | Made by Saurabh
         </div>
       </div>
 
