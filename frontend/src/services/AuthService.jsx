@@ -10,4 +10,23 @@ export const registerUser= async (userData) =>{
     return res.data;
 }
 
+export const updateProfile=async (userData) =>{
+    try{
+        const token= localStorage.getItem("token");
+
+        const res=await API.put('/user/profile',
+            userData,
+            {
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                }
+            }
+        );
+
+        return(res.data);
+    }catch(err){
+        console.error(err);
+    }
+}
+
 
