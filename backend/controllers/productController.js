@@ -84,6 +84,8 @@ exports.getHomePageProducts=async(req,res)=>{
 }
 
 
+
+//get single product by id
 exports.getSingleProduct=async(req,res)=>{
     try{
 
@@ -103,7 +105,10 @@ exports.getSingleProduct=async(req,res)=>{
     }
 }
 
- // Get Products via user search
+
+
+ 
+// Get Products via user search
 exports.getProducts=async(req,res)=>{
     try{
         const {search,category,min,max,sort,tag}=req.query;
@@ -140,7 +145,10 @@ exports.getProducts=async(req,res)=>{
     }
 }
 
+
+//get the related products of the spacific category
 exports.relatedProducts=async(req,res)=>{
+    
     const {id}=req.params;
 
     const currentProduct=await Product.findById(id);

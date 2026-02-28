@@ -13,6 +13,8 @@ import CheckoutPage from '../pages/CheckOutPage';
 import ProtectedRoute from '../components/ProtectedRoute';
 import MyOrders from '../pages/MyOrders';
 import Profile from '../pages/Profile';
+import About from '../pages/AboutPage';
+import Contact from '../pages/ContactPage';
 
 const AppRoutes=()=>{
     return(
@@ -24,6 +26,8 @@ const AppRoutes=()=>{
                 <Route index element={<HomePage/>} />
                 <Route path='/register' element={<SignUp/>} />
                 <Route path='/login' element={<Login/>}/>
+                <Route path='/about'  element={<About/>}/>
+                <Route path='/contact'  element={<Contact/>}/>
                 <Route path='/products' element={<ProductListning/>} />
                 <Route path='/cart' element={<CartPage/>} />
                 <Route path='/checkout' element={<ProtectedRoute><CheckoutPage/></ProtectedRoute>} />

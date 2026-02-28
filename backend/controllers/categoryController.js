@@ -1,5 +1,7 @@
 const Category=require('../models/Category');
 
+
+//create a new category
 exports.createCategory=async(req,res)=>{
     try{
         const{name, description }=req.body;

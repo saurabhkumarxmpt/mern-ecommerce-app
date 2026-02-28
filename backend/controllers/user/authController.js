@@ -78,5 +78,3 @@ exports.loginUser=async(req,res)=>{
         });
     }
 }
-
-//get user profile

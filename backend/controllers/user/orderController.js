@@ -1,5 +1,6 @@
-const Order=require("../../models/Orders");
+const Order=require("../../models/Orders"); //import order schema
 
+//create a new order
 exports.createOrder=async(req,res)=>{
     try{
         const {orderItems,shippingAddress,totalPrice}=req.body;
@@ -23,6 +24,8 @@ exports.createOrder=async(req,res)=>{
     }
 }
 
+
+//get the all order for users
 exports.getOrders=async(req,res)=>{
     try{
         const orders=await Order.find({user:req.user.id})
