@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { updateProfileAPI } from "../services/UserServices";
+import { updateProfile } from "../services/AuthService";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   const { user, updateUser } = useAuth();
@@ -9,41 +10,83 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
-    name: user?.name || "",
-    email: user?.email || "",
-    phone: user?.phone || "",
-    address: user?.address || "",
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
   });
 
+  // Sync formData when user changes
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        name: user.name || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        address: user.address || "",
+      });
+    }
+  }, [user]);
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
   const handleUpdate = async () => {
+    const confirmUpdate = window.confirm(
+      "Are you sure you want to update your profile?"
+    );
+
+    if (!confirmUpdate) return;
+
     try {
       setLoading(true);
-      const res = await updateProfileAPI(formData);
-      updateUser(res.data);
+
+      const res = await updateProfile(formData);
+
+      // Backend structure safe check
+      const updatedUser = res.user || res.data || res;
+
+      if (!updatedUser) {
+        toast.error("Something went wrong!");
+        return;
+      }
+
+      updateUser(updatedUser); // context + localStorage update
+
+      toast.success("Profile updated successfully!");
+
       setIsEditing(false);
     } catch (error) {
       console.log(error);
+      toast.error("Update failed!");
     } finally {
       setLoading(false);
     }
   };
 
   const handleCancel = () => {
-    setFormData({
-      name: user?.name || "",
-      email: user?.email || "",
-      phone: user?.phone || "",
-      address: user?.address || "",
-    });
+    if (user) {
+      setFormData({
+        name: user.name || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        address: user.address || "",
+      });
+    }
     setIsEditing(false);
   };
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-500">Loading Profile...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center py-10 px-4">
@@ -62,19 +105,18 @@ const Profile = () => {
 
           <span
             className={`text-xs px-3 py-1 rounded-sm font-medium ${
-              user?.role === "admin"
+              user.role === "admin"
                 ? "bg-green-100 text-green-600"
                 : "bg-gray-100 text-gray-600"
             }`}
           >
-            {user?.role?.toUpperCase()}
+            {user.role?.toUpperCase()}
           </span>
         </div>
 
         {/* Body */}
         <div className="grid md:grid-cols-2 gap-6 px-6 py-6">
 
-          {/* Name */}
           <div>
             <label className="block text-sm text-gray-500 mb-1">
               Full Name
@@ -89,7 +131,6 @@ const Profile = () => {
             />
           </div>
 
-          {/* Email */}
           <div>
             <label className="block text-sm text-gray-500 mb-1">
               Email
@@ -104,7 +145,6 @@ const Profile = () => {
             />
           </div>
 
-          {/* Phone */}
           <div>
             <label className="block text-sm text-gray-500 mb-1">
               Phone
@@ -119,7 +159,6 @@ const Profile = () => {
             />
           </div>
 
-          {/* Address */}
           <div>
             <label className="block text-sm text-gray-500 mb-1">
               Address
@@ -134,20 +173,20 @@ const Profile = () => {
             />
           </div>
 
-          {/* Joined Date */}
           <div>
             <label className="block text-sm text-gray-500 mb-1">
               Member Since
             </label>
             <div className="border border-gray-200 rounded-sm px-4 py-2 text-gray-600 bg-gray-50">
-              {new Date(user?.createdAt).toLocaleDateString()}
+              {user.createdAt
+                ? new Date(user.createdAt).toLocaleDateString()
+                : "N/A"}
             </div>
           </div>
         </div>
 
-        {/* Footer Buttons */}
+        {/* Footer */}
         <div className="border-t border-gray-200 px-6 py-4 flex justify-end gap-3">
-
           {isEditing ? (
             <>
               <button
@@ -173,7 +212,6 @@ const Profile = () => {
               Edit Profile
             </button>
           )}
-
         </div>
       </div>
     </div>
