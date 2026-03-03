@@ -11,6 +11,6 @@ exports.authMiddleware=async(req,res,next)=>{
         req.user=decoded;
         next();
     }catch(err){
-        res.status(500).json({message:err.message})
+        res.status(500).json({message:err.message});
     }
 };
