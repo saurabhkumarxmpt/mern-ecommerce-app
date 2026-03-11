@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-import Login from "../admin/auth/Login";
+import AdminLogin from "../admin/pages/AdminLogin";
 
 
 const AdminRoutes = () => {
@@ -8,7 +8,7 @@ const AdminRoutes = () => {
     <Routes>
 
       {/* Login Page */}
-      <Route path="/admin" element={<Login />} />
+      <Route path="/admin" element={<AdminLogin />} />
 
       {/* Admin Panel */}
       {/* <Route path="/admin/dashboard" element={<AdminLayout />}>
