@@ -1,13 +1,39 @@
 import { useState } from "react";
+import {loginAdmin} from '../services/authServices';
 import { FaUserShield } from "react-icons/fa";
+import {useNavigate} from 'react-router-dom';
 
 const AdminLogin = () => {
+
+  const navigate=useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(email, password);
+    try{
+      const data=await loginAdmin({
+        email,
+        password
+      });
+
+      localStorage.setItem("adminToken",data.token);
+
+      localStorage.setItem(
+        "admin",
+        JSON.stringify({
+          name:data.user.name,
+          email:data.user.email,
+          role:data.user.role
+        })
+      );
+      console.log(data);
+
+      navigate('/admin/dashboard')
+
+    }catch(err){
+      alert("login unsecess")
+    }
   };
 
   return (
