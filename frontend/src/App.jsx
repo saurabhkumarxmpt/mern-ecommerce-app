@@ -1,4 +1,5 @@
 import AppRoutes from "./routes/AppRoutes";
+import AdminRoutes from "./routes/AdminRoutes";
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
 
@@ -8,6 +9,7 @@ const App=()=>{
     <AuthProvider>
     <CartProvider>
     <AppRoutes/>
+    <AdminRoutes/>
     </CartProvider>
     </AuthProvider>
     </>
