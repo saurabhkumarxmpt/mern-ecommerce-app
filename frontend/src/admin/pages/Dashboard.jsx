@@ -1,128 +1,155 @@
 import { useEffect, useState } from "react";
-import {dashboardData} from '../services/AdminData';
+import { dashboardData } from "../services/AdminData";
+
+import {
+  FaBox,
+  FaShoppingCart,
+  FaUsers,
+  FaRupeeSign,
+  FaClock,
+  FaCalendarDay,
+  FaExclamationTriangle
+} from "react-icons/fa";
+
+import DashboardAnalytics from '../components/DashboardCharts'
+import DashboardTables from '../components/DashboardTables';
 
 const Dashboard = () => {
-
   const [data, setData] = useState(null);
 
   useEffect(() => {
-
     const loadData = async () => {
-
       const dashboard = await dashboardData();
-
       setData(dashboard);
-
     };
 
     loadData();
-
   }, []);
 
   if (!data) return <p className="p-6">Loading...</p>;
 
   return (
-     <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
 
-        <div className="bg-white border border-gray-200 p-4 rounded-sm">
-          <p className="text-gray-500 text-sm">Total Products</p>
-          <h2 className="text-2xl font-semibold text-gray-800">
-            {data.totalProducts}
-          </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        {/* Products */}
+
+        <div className="bg-white border border-gray-200 p-6 rounded-sm flex items-center justify-between hover:shadow-sm transition">
+
+          <div>
+            <p className="text-gray-500 text-sm">Total Products</p>
+            <h2 className="text-3xl font-semibold text-gray-700 mt-1">
+              {data.totalProducts}
+            </h2>
+          </div>
+
+          <div className="w-12 h-12 flex items-center justify-center bg-green-100 text-green-600 rounded-sm">
+            <FaBox size={20} />
+          </div>
+
         </div>
 
-        <div className="bg-white border border-gray-200 p-4 rounded-sm">
-          <p className="text-gray-500 text-sm">Total Orders</p>
-          <h2 className="text-2xl font-semibold text-gray-800">
-            {data.totalOrders}
-          </h2>
+
+        {/* Orders */}
+
+        <div className="bg-white border border-gray-200 p-6 rounded-sm flex items-center justify-between hover:shadow-sm transition">
+
+          <div>
+            <p className="text-gray-500 text-sm">Total Orders</p>
+            <h2 className="text-3xl font-semibold text-gray-700 mt-1">
+              {data.totalOrders}
+            </h2>
+          </div>
+
+          <div className="w-12 h-12 flex items-center justify-center bg-green-100 text-green-600 rounded-sm">
+            <FaShoppingCart size={20} />
+          </div>
+
         </div>
 
-        <div className="bg-white border border-gray-200 p-4 rounded-sm">
-          <p className="text-gray-500 text-sm">Total Users</p>
-          <h2 className="text-2xl font-semibold text-gray-800">
-            {data.totalUsers}
-          </h2>
+
+        {/* Users */}
+
+        <div className="bg-white border border-gray-200 p-6 rounded-sm flex items-center justify-between hover:shadow-sm transition">
+
+          <div>
+            <p className="text-gray-500 text-sm">Total Users</p>
+            <h2 className="text-3xl font-semibold text-gray-700 mt-1">
+              {data.totalUsers}
+            </h2>
+          </div>
+
+          <div className="w-12 h-12 flex items-center justify-center bg-green-100 text-green-600 rounded-sm">
+            <FaUsers size={20} />
+          </div>
+
         </div>
 
-        <div className="bg-white border border-gray-200 p-4 rounded-sm">
-          <p className="text-gray-500 text-sm">Revenue</p>
-          <h2 className="text-2xl font-semibold text-green-600">
-            ₹ {data.totalRevenue}
-          </h2>
+
+        {/* Revenue */}
+
+        <div className="bg-white border border-gray-200 p-6 rounded-sm flex items-center justify-between hover:shadow-sm transition">
+
+          <div>
+            <p className="text-gray-500 text-sm">Total Revenue</p>
+            <h2 className="text-3xl font-semibold text-green-600 mt-1">
+              ₹ {data.totalRevenue}
+            </h2>
+          </div>
+
+          <div className="w-12 h-12 flex items-center justify-center bg-green-100 text-green-600 rounded-sm">
+            <FaRupeeSign size={20} />
+          </div>
+
+        </div>
+
+
+        {/* Pending Orders */}
+
+        <div className="bg-white border border-gray-200 p-6 rounded-sm flex items-center justify-between hover:shadow-sm transition">
+
+          <div>
+            <p className="text-gray-500 text-sm">Pending Orders</p>
+            <h2 className="text-3xl font-semibold text-gray-700 mt-1">
+              {data.pendingOrders}
+            </h2>
+          </div>
+
+          <div className="w-12 h-12 flex items-center justify-center bg-yellow-100 text-yellow-600 rounded-sm">
+            <FaClock size={20} />
+          </div>
+
+        </div>
+
+
+        {/* Today Orders */}
+
+        <div className="bg-white border border-gray-200 p-6 rounded-sm flex items-center justify-between hover:shadow-sm transition">
+
+          <div>
+            <p className="text-gray-500 text-sm">Today Orders</p>
+            <h2 className="text-3xl font-semibold text-gray-700 mt-1">
+              {data.todayOrders}
+            </h2>
+          </div>
+
+          <div className="w-12 h-12 flex items-center justify-center bg-green-100 text-green-600 rounded-sm">
+            <FaCalendarDay size={20} />
+          </div>
+
         </div>
 
       </div>
 
-      {/* Recent Orders */}
-      <div className="bg-white border border-gray-200 rounded-sm">
+      {/* charts */}
+      <DashboardAnalytics data={data} />
 
-        <div className="p-4 border-b border-gray-200">
-          <h2 className="font-semibold text-gray-700">
-            Recent Orders
-          </h2>
-        </div>
+      {/* dashboard tables */}
 
-        <div className="overflow-x-auto">
-
-          <table className="w-full text-sm">
-
-            <thead className="bg-gray-50">
-              <tr className="text-left text-gray-600">
-                <th className="p-3">Customer</th>
-                <th className="p-3">Product</th>
-                <th className="p-3">Price</th>
-                <th className="p-3">Status</th>
-                <th className="p-3">Date</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              {data.recentOrders.map((order) => (
-
-                <tr key={order._id} className="border-t">
-
-                  <td className="p-3">
-                    <p className="font-medium">{order.user?.name}</p>
-                    <p className="text-gray-500 text-xs">
-                      {order.user?.email}
-                    </p>
-                  </td>
-
-                  <td className="p-3">
-                    {order.orderItems[0]?.name.slice(0,40)}...
-                  </td>
-
-                  <td className="p-3 font-medium">
-                    ₹{order.totalPrice}
-                  </td>
-
-                  <td className="p-3">
-                    <span className="px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded-sm">
-                      {order.orderStatus}
-                    </span>
-                  </td>
-
-                  <td className="p-3 text-gray-500">
-                    {new Date(order.createdAt).toLocaleDateString()}
-                  </td>
-
-                </tr>
-
-              ))}
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
+      <DashboardTables data={data} />
     </div>
   );
 };
