@@ -26,3 +26,22 @@ export const GetRelatedProducts=async(id)=>{
         throw err;
     }
 }
+
+
+export const createProduct=async(productData)=>{
+    try{
+        const res=await API.post('/product/create', 
+            productData,
+            {
+                headers:{
+                    "Content-Type": "multipart/form-data"
+                }
+            }
+        
+        )
+
+        return res.data;
+    }catch(err){
+        console.error(err.message);
+    }
+}

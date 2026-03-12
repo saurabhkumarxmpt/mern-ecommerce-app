@@ -27,8 +27,9 @@ const AdminSideBar = () => {
       name: "Products",
       icon: <FaBox />,
       children: [
-        { name: "All Products", path: "/admin/products" },
-        { name: "Add Product", path: "/admin/products/add" }
+        { name: "All Products", path: "all-products" },
+        { name: "Add Product", path: "add-product" },
+        { name: "Categorys", path: "/admin/dashboard/catgorys" }
       ]
     },
 
