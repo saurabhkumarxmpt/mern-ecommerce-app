@@ -2,6 +2,7 @@ import { useState } from "react";
 import {loginAdmin} from '../services/authServices';
 import { FaUserShield } from "react-icons/fa";
 import {useNavigate} from 'react-router-dom';
+import toast from "react-hot-toast";
 
 const AdminLogin = () => {
 
@@ -28,18 +29,18 @@ const AdminLogin = () => {
         })
       );
       console.log(data);
-
-      navigate('/admin/dashboard')
+      toast.success(`Welcome`);
+      navigate('/admin/dashboard');
 
     }catch(err){
-      alert("login unsecess")
+      alert("please check your email and password");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
 
-      <div className="bg-white w-[380px] p-8 rounded-sm shadow-md border">
+      <div className="bg-white w-[380px] p-8 rounded-sm shadow-md border-gray-200 border">
 
         {/* Icon */}
         <div className="flex justify-center mb-4 text-green-600 text-3xl">
@@ -61,7 +62,8 @@ const AdminLogin = () => {
               placeholder="Enter admin email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border mt-1 p-2.5 rounded-sm focus:outline-none focus:ring-1 focus:ring-green-600"
+              className="w-full border border-gray-200 mt-1 p-2.5 rounded-sm focus:outline-none focus:ring-1 focus:ring-green-600"
+              required
             />
           </div>
 
@@ -73,7 +75,8 @@ const AdminLogin = () => {
               placeholder="Enter password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border mt-1 p-2.5 rounded-sm focus:outline-none focus:ring-1 focus:ring-green-600"
+              className="w-full border border-gray-200 mt-1 p-2.5 rounded-sm focus:outline-none focus:ring-1 focus:ring-green-600"
+              required
             />
           </div>
 
