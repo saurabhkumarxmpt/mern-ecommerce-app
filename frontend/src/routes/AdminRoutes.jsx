@@ -13,6 +13,7 @@ const AdminRoutes = () => {
       {/* Admin Panel */}
       <Route path="/admin/dashboard" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />
+        
       </Route>
 
     </Routes>

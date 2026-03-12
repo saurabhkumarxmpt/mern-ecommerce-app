@@ -5,6 +5,8 @@ const AdminNavbar = () => {
 
   const navigate = useNavigate();
 
+  const admin = JSON.parse(localStorage.getItem("admin"));
+
   const handleLogout = () => {
     localStorage.removeItem("admin");
     localStorage.removeItem("adminToken");
@@ -12,30 +14,28 @@ const AdminNavbar = () => {
   };
 
   return (
-    <div className="w-full bg-white border-b px-6 py-3 flex items-center justify-between">
+    <div className="w-full bg-white border-b border-gray-300 px-6 py-3 flex items-center justify-between">
 
       {/* Left */}
       <h1 className="text-lg font-semibold text-gray-700">
         Admin Dashboard
       </h1>
 
-      {/* Center Search */}
-      <div className="w-1/3 hidden md:block">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-full border px-3 py-1.5 rounded-sm focus:outline-none focus:border-green-600"
-        />
-      </div>
-
       {/* Right */}
       <div className="flex items-center gap-4">
 
-        <FaUserCircle className="text-2xl text-gray-600" />
+        {/* Admin Info */}
+        <div className="flex items-center gap-2 text-gray-700">
+          <FaUserCircle className="text-2xl" />
+          <span className="text-sm font-medium">
+            {admin?.name || "Admin"}
+          </span>
+        </div>
 
+        {/* Logout */}
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 border px-3 py-1.5 rounded-sm hover:border-green-600 hover:text-green-600 transition"
+          className="flex items-center gap-2 bg-green-600 text-white px-4 py-1.5 rounded-sm hover:bg-green-700 transition"
         >
           <FaSignOutAlt />
           Logout

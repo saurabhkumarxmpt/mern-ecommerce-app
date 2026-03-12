@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {loginAdmin} from '../services/authServices';
 import { FaUserShield } from "react-icons/fa";
 import {useNavigate} from 'react-router-dom';
@@ -36,6 +36,15 @@ const AdminLogin = () => {
       alert("please check your email and password");
     }
   };
+
+
+  useEffect(()=>{
+      const token=localStorage.getItem("adminToken");
+
+      if(token){
+        navigate('/admin/dashboard');
+      }
+  },[]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
