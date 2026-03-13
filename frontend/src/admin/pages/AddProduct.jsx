@@ -133,245 +133,265 @@ const AddProduct = () => {
         </h1>
 
 
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white border border-gray-200 rounded-sm p-6 space-y-6 shadow-sm"
-        >
+         <form
+  onSubmit={handleSubmit}
+  className="bg-white border border-gray-200 rounded-lg p-8 space-y-8 shadow-sm max-w-4xl"
+>
 
+  <h2 className="text-lg font-semibold text-gray-800">
+    Add New Product
+  </h2>
 
-          {/* Product Name */}
 
-          <div>
+  {/* Product Name */}
 
-            <label className="text-sm text-gray-600">
-              Product Name
-            </label>
+  <div>
 
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full mt-2 border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-black"
-            />
+    <label className="text-sm text-gray-600">
+      Product Name
+    </label>
 
-          </div>
+    <input
+      type="text"
+      name="name"
+      value={formData.name}
+      onChange={handleChange}
+      required
+      placeholder="Enter product name"
+      className="w-full mt-2 border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-black"
+    />
 
+  </div>
 
 
-          {/* Price + Stock */}
+  {/* Price + Stock */}
 
-          <div className="grid grid-cols-2 gap-4">
+  <div className="grid grid-cols-2 gap-6">
 
-            <div>
+    <div>
 
-              <label className="text-sm text-gray-600">
-                Price
-              </label>
+      <label className="text-sm text-gray-600">
+        Price
+      </label>
 
-              <input
-                type="number"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-                required
-                className="w-full mt-2 border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-black"
-              />
+      <input
+        type="number"
+        name="price"
+        value={formData.price}
+        onChange={handleChange}
+        required
+        className="w-full mt-2 border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-black"
+      />
 
-            </div>
+    </div>
 
 
-            <div>
+    <div>
 
-              <label className="text-sm text-gray-600">
-                Stock
-              </label>
+      <label className="text-sm text-gray-600">
+        Stock
+      </label>
 
-              <input
-                type="number"
-                name="stock"
-                value={formData.stock}
-                onChange={handleChange}
-                required
-                className="w-full mt-2 border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-black"
-              />
+      <input
+        type="number"
+        name="stock"
+        value={formData.stock}
+        onChange={handleChange}
+        required
+        className="w-full mt-2 border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-black"
+      />
 
-            </div>
+    </div>
 
-          </div>
+  </div>
 
 
+  {/* Category + Featured */}
 
-          {/* Category */}
+  <div className="flex items-center gap-6">
 
-          <div>
+    <div className="w-52">
 
-            <label className="text-sm text-gray-600">
-              Category
-            </label>
+      <label className="text-sm text-gray-600">
+        Category
+      </label>
 
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              required
-              className="w-full mt-2 border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-black"
-            >
+      <select
+        name="category"
+        value={formData.category}
+        onChange={handleChange}
+        required
+        className="w-full mt-2 border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-black"
+      >
 
-              <option value="">Select Category</option>
+        <option value="">Select</option>
 
-              {categories && categories.map(cat => (
+        {categories?.map(cat => (
 
-                <option key={cat._id} value={cat._id}>
-                  {cat.name}
-                </option>
+          <option key={cat._id} value={cat._id}>
+            {cat.name}
+          </option>
 
-              ))}
+        ))}
 
-            </select>
+      </select>
 
-          </div>
+    </div>
 
 
 
-          {/* Description */}
+    {/* Featured Toggle */}
 
-          <div>
+    <div className="flex items-center gap-3 mt-6">
 
-            <label className="text-sm text-gray-600">
-              Description
-            </label>
+      <span className="text-sm text-gray-600">
+        Featured
+      </span>
 
-            <textarea
-              name="description"
-              rows="4"
-              value={formData.description}
-              onChange={handleChange}
-              className="w-full mt-2 border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-black"
-            />
+      <label className="relative inline-flex items-center cursor-pointer">
 
-          </div>
+        <input
+          type="checkbox"
+          name="isFeatured"
+          checked={formData.isFeatured}
+          onChange={handleChange}
+          className="sr-only peer"
+        />
 
+        <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-black transition"></div>
 
+        <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition peer-checked:translate-x-5"></div>
 
-          {/* Tags */}
+      </label>
 
-          <div>
+    </div>
 
-            <label className="text-sm text-gray-600">
-              Tags (comma separated)
-            </label>
+  </div>
 
-            <input
-              type="text"
-              name="tags"
-              placeholder="phone, apple, new"
-              value={formData.tags}
-              onChange={handleChange}
-              className="w-full mt-2 border border-gray-200 rounded-sm px-3 py-2 focus:outline-none focus:border-black"
-            />
 
-          </div>
+  {/* Description */}
 
+  <div>
 
+    <label className="text-sm text-gray-600">
+      Description
+    </label>
 
-          {/* Featured */}
+    <textarea
+      name="description"
+      rows="4"
+      value={formData.description}
+      onChange={handleChange}
+      className="w-full mt-2 border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-black"
+    />
 
-          <div className="flex items-center gap-2">
+  </div>
 
-            <input
-              type="checkbox"
-              name="isFeatured"
-              checked={formData.isFeatured}
-              onChange={handleChange}
-            />
 
-            <label className="text-sm text-gray-600">
-              Featured Product
-            </label>
+  {/* Tags */}
 
-          </div>
+  <div>
 
+    <label className="text-sm text-gray-600">
+      Tags
+    </label>
 
+    <input
+      type="text"
+      name="tags"
+      placeholder="phone, apple, new"
+      value={formData.tags}
+      onChange={handleChange}
+      className="w-full mt-2 border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-black"
+    />
 
-          {/* Image Upload */}
+  </div>
 
-          <div>
 
-            <label className="text-sm text-gray-600">
-              Product Images
-            </label>
 
-            <div className="mt-3 border border-dashed border-gray-300 rounded-sm p-6 text-center">
+  {/* Image Upload */}
 
-              <UploadCloud className="mx-auto text-gray-400" size={30} />
+  <div>
 
-              <p className="text-sm text-gray-500 mt-2">
-                Upload multiple product images
-              </p>
+    <label className="text-sm text-gray-600">
+      Product Images
+    </label>
 
-              <input
-                type="file"
-                multiple
-                accept="image/*"
-                onChange={handleImages}
-                className="mt-4"
-              />
+    <label className="mt-3 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-8 cursor-pointer hover:border-black transition">
 
-            </div>
+      <UploadCloud className="text-gray-400" size={32} />
 
-          </div>
+      <p className="text-sm text-gray-500 mt-2">
+        Click to upload images
+      </p>
 
+      <input
+        type="file"
+        multiple
+        accept="image/*"
+        onChange={handleImages}
+        className="hidden"
+      />
 
+    </label>
 
-          {/* Image Preview */}
+  </div>
 
-          {imagePreview.length > 0 && (
 
-            <div className="grid grid-cols-5 gap-3">
 
-              {imagePreview.map((img, index) => (
+  {/* Image Preview */}
 
-                <div key={index} className="relative">
+  {imagePreview.length > 0 && (
 
-                  <img
-                    src={img}
-                    alt=""
-                    className="h-24 w-full object-cover rounded-sm border"
-                  />
+    <div className="grid grid-cols-6 gap-4">
 
-                  <button
-                    type="button"
-                    onClick={() => removeImage(index)}
-                    className="absolute top-1 right-1 bg-white rounded-full p-1 shadow"
-                  >
-                    <X size={14} />
-                  </button>
+      {imagePreview.map((img, index) => (
 
-                </div>
+        <div key={index} className="relative group">
 
-              ))}
-
-            </div>
-
-          )}
-
-
-
-          {/* Submit */}
+          <img
+            src={img}
+            alt=""
+            className="h-24 w-full object-cover rounded-md border"
+          />
 
           <button
-            type="submit"
-            className="bg-black text-white px-6 py-2 rounded-sm hover:opacity-90"
+            type="button"
+            onClick={() => removeImage(index)}
+            className="absolute top-1 right-1 bg-white rounded-full p-1 shadow opacity-0 group-hover:opacity-100"
           >
 
-            Add Product
+            <X size={14} />
 
           </button>
 
+        </div>
 
-        </form>
+      ))}
+
+    </div>
+
+  )}
+
+
+
+  {/* Submit */}
+
+  <div className="pt-4">
+
+    <button
+      type="submit"
+      className="bg-green-600 text-white px-6 py-2 rounded-md hover:opacity-90"
+    >
+
+      Add Product
+
+    </button>
+
+  </div>
+
+</form>
+
 
       </div>
 

@@ -184,3 +184,53 @@ exports.getAllProducts=async(req,res)=>{
         res.status(500).json({message:err.message});
     }
 }
+
+exports.updateProduct=async(req,res)=>{
+    try{
+        const{id}=req.params;
+
+        const {
+            name,
+            description,
+            price,
+            category,
+            isFeatured,
+            stock,
+            tags
+        } = req.body;
+
+        let product=await Product.findById(id);
+
+        if(!product){
+            return res.stats(404).json({message:"product not found"});
+        }
+
+        let images=product.images;
+
+        if(req.files && req.files.length > 0){
+            images=req.files.map(file => file.path)
+        }
+
+        product=await Product.findByIdAndUpdate(
+            id,
+            {
+            name,
+            description,
+            price,
+            category,
+            isFeatured,
+            stock,
+            tags,
+            images
+             },
+             {new:true}
+        );
+
+        return res.status(200).json({
+            message:"Product update successfully",
+            product
+        });
+    }catch(err){
+        res.status(500).json({message:err.message});
+    }
+}

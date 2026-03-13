@@ -31,7 +31,7 @@ export const GetRelatedProducts=async(id)=>{
 export const createProduct=async(productData)=>{
     try{
 
-        const token=localStorage.getItem("token");
+        const token=localStorage.getItem("adminToken");
         const res=await API.post('/product/create', 
             productData,
             {
