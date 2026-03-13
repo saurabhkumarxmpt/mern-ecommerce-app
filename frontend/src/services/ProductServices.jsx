@@ -30,15 +30,28 @@ export const GetRelatedProducts=async(id)=>{
 
 export const createProduct=async(productData)=>{
     try{
+
+        const token=localStorage.getItem("token");
         const res=await API.post('/product/create', 
             productData,
             {
                 headers:{
-                    "Content-Type": "multipart/form-data"
+                    "Content-Type": "multipart/form-data",
+                     Authorization: `Bearer ${token}`
                 }
             }
         
         )
+
+        return res.data;
+    }catch(err){
+        console.error(err.message);
+    }
+}
+
+export const Allproducts=async()=>{
+    try{
+        const res=await API.get('/product/allproducts');
 
         return res.data;
     }catch(err){

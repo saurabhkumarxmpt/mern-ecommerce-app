@@ -4,7 +4,7 @@ const Product=require('../models/Product');
 exports.createProduct=async(req,res)=>{
     try{
 
-        const images=req.files.map((file) =>  file.path);
+        const images=req.files ? req.files.map((file) =>  file.path) : [];
 
         const{
             name,
@@ -37,6 +37,8 @@ exports.createProduct=async(req,res)=>{
             message:"Product Created Successfully",
             product
         });
+        console.log(req.body);
+        console.log(req.files);
 
     }catch(err){
         res.status(500).json({message:err.message});
@@ -164,4 +166,21 @@ exports.relatedProducts=async(req,res)=>{
     }).limit(8);
 
     res.json(relatedProducts);
+}
+
+
+exports.getAllProducts=async(req,res)=>{
+    try{
+
+        const products=await Product.find()
+        .populate("category","name")
+        .sort({createdAt: -1 });
+        
+        res.status(200).json({
+            totalProducts: products.length,
+            products
+        });
+    }catch(err){
+        res.status(500).json({message:err.message});
+    }
 }

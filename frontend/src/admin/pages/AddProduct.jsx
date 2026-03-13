@@ -112,6 +112,7 @@ const AddProduct = () => {
       await createProduct(productData);
 
       alert("Product added successfully");
+      console.log(productData);
 
     } catch (err) {
       console.log(err);

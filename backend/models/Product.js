@@ -17,7 +17,7 @@ const productSchema=new mongoose.Schema(
         },
         category:{
             type: mongoose.Schema.Types.ObjectId,
-            ref: "categories",
+            ref: "category",
             required:true
         },
         isFeatured: {

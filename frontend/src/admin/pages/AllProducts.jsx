@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Pencil, Trash2, PackageSearch } from "lucide-react";
-import {GetProducts} from '../../services/ProductServices';
+import {Allproducts} from '../../services/ProductServices';
 
 const AllProducts = () => {
 
@@ -9,8 +9,9 @@ const AllProducts = () => {
 
   const fetchProducts = async ()=>{
     try{
-      const data = await GetProducts();
+      const data = await Allproducts();
       setProducts(data.products);
+      console.log(data);
     }catch(err){
       console.log(err);
     }finally{
@@ -20,6 +21,7 @@ const AllProducts = () => {
 
   useEffect(()=>{
     fetchProducts();
+    
   },[])
 
   const handleDelete = async(id)=>{
@@ -56,7 +58,7 @@ const AllProducts = () => {
 
       {/* Table */}
 
-      <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+      <div className="bg-white border border-gray-200 rounded-md overflow-hidden">
 
         {loading ? (
 
@@ -128,7 +130,7 @@ const AllProducts = () => {
                   {/* Category */}
 
                   <td className="p-4 text-gray-600">
-                    {product.category}
+                    {product.category?.name}
                   </td>
 
                   {/* Price */}

@@ -5,7 +5,8 @@ const{
     getSingleProduct,
     getHomePageProducts,
     getProducts,
-    relatedProducts
+    relatedProducts,
+    getAllProducts
 }=require('../controllers/productController');
 
 const upload=require('../middlewares/upload');
@@ -17,6 +18,7 @@ const router=express.Router();
 router.post('/create',upload.array("images",5),authMiddleware,isAdmin,createProduct);
 router.get('/homepageproducts',getHomePageProducts);
 router.get('/',getProducts);
+router.get('/allproducts',getAllProducts);
 router.get('/category/:category',getProductsByCategory);
 router.get('/:id',getSingleProduct);
 router.get('/related/:id',relatedProducts);
