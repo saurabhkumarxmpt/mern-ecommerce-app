@@ -45,7 +45,7 @@ exports.getAllOrders=async(req,res)=>{
 
         const orders=await Order.find()
         .populate("user","name,email")
-        .populate("products.product", "name price image")
+        .populate("orderItems.product", "name price image")
         .sort({ createdAt: -1 })
 
         res.status(200).json({orders});
@@ -80,7 +80,7 @@ exports.getTodayOrders = async (req, res) => {
       }
     })
       .populate("user", "name email")
-      .populate("products.product", "name price image")
+      .populate("orderItems.product", "name price image")
       .sort({ createdAt: -1 });
 
     res.status(200).json({
@@ -97,4 +97,41 @@ exports.getTodayOrders = async (req, res) => {
     });
 
   }
+};
+
+
+exports.updateOrderStatus = async (req, res) => {
+
+  try {
+
+    const { orderStatus } = req.body;
+
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found"
+      });
+    }
+
+    order.orderStatus = orderStatus;
+
+    await order.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Order status updated",
+      order
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+
 };

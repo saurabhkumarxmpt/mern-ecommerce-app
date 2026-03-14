@@ -4,7 +4,8 @@ const {
     createOrder,
     getOrders,
     getAllOrders,
-    getTodayOrders
+    getTodayOrders,
+    updateOrderStatus
     }=require("../controllers/user/orderController");
 const {authMiddleware}=require("../middlewares/authMiddleware");
 
@@ -14,6 +15,7 @@ router.post('/',authMiddleware,createOrder);
 router.get('/my-orders',authMiddleware,getOrders);
 router.get('/all-orders',getAllOrders);
 router.get('/today',getTodayOrders);
+router.put('/update/:id',updateOrderStatus);
 
 
 module.exports=router;

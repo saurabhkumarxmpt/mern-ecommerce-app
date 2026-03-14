@@ -6,6 +6,7 @@ import Dashboard from "../admin/pages/Dashboard";
 import AllProducts from "../admin/pages/AllProducts";
 import AddProduct from "../admin/pages/AddProduct";
 import AllOrders from "../admin/pages/AllOrders";
+import TodayOrders from "../admin/pages/TodayOrders";
 
 const AdminRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AdminRoutes = () => {
         <Route path="all-products" element={<AllProducts/>} /> 
         <Route path='add-product' element={<AddProduct/> } />
         <Route path='all-orders' element={<AllOrders/>} />
+        <Route path='today-orders' element={<TodayOrders/>} />
       </Route>
 
     </Routes>

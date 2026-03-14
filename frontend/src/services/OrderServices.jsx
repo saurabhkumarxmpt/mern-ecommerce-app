@@ -27,3 +27,19 @@ export const getMyOrders=async () =>{
 
 }
 
+
+export const getAllOrders=async()=>{
+    const res=await API.get('/orders/all-orders');
+    return res.data;
+}
+
+export const getTodayOrdres=async()=>{
+    const res=await API.get('/orders/today');
+    return res.data;
+}
+
+export const updateOrderStatus = async (id,data) => {
+
+    const res=await API.put(`/orders/update/${id}`,data);
+    return res.data;
+}
