@@ -59,11 +59,11 @@ export const Allproducts=async()=>{
     }
 }
 
-export const updateProduct = async (id,productData)=>{
+export const updateProduct = async (id,formData)=>{
     try{
         const token=localStorage.getItem("adminToken");
         const res=await API.put(`/product/update/${id}`,
-            productData,
+            formData,
             {
             headers:{
                     "Content-Type": "multipart/form-data",

@@ -22,7 +22,7 @@ router.get('/homepageproducts',getHomePageProducts);
 router.get('/',getProducts);
 router.get('/allproducts',getAllProducts);
 router.delete('/delete-product/:id',deleteProduct);
-router.put('/update/:id',authMiddleware,isAdmin,upload.array("images"),updateProduct);
+router.put('/update/:id',authMiddleware,isAdmin,upload.any(),updateProduct);
 router.get('/category/:category',getProductsByCategory);
 router.get('/:id',getSingleProduct);
 router.get('/related/:id',relatedProducts);

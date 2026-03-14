@@ -56,37 +56,55 @@ const AllProducts = () => {
     }
   };
 
-  const handleImageChange = (e, index) => {
+ const handleImageChange = (e, index) => {
+  const file = e.target.files[0];
 
-      const file = e.target.files[0];
+  const updatedImages = [...editProduct.images];
 
-      const updatedImages = [...editProduct.images];
+  updatedImages[index] = file;
 
-      updatedImages[index] = URL.createObjectURL(file);
+  setEditProduct({
+    ...editProduct,
+    images: updatedImages
+  });
+};
 
-      setEditProduct({
-        ...editProduct,
-        images: updatedImages
-      });
-
-  };
 
 
   const handleUpdate = async () => {
-    try {
-      const res = await updateProduct(editProduct._id, editProduct);
+  try {
 
-      setProducts(
-        products.map((p) =>
-          p._id === editProduct._id ? res.product : p
-        )
-      );
+    const formData = new FormData();
 
-      setEditProduct(null);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    formData.append("name", editProduct.name);
+    formData.append("description", editProduct.description);
+    formData.append("price", editProduct.price);
+    formData.append("category", editProduct.category._id || editProduct.category);
+    formData.append("isFeatured", editProduct.isFeatured);
+    formData.append("stock", editProduct.stock);
+
+    // multiple images
+    editProduct.images.forEach((img,index)=>{
+       if (img instanceof File) {
+          formData.append(`image_${index}`, img);
+        }
+    })
+
+    const res = await updateProduct(editProduct._id, formData);
+
+    setProducts(
+      products.map((p) =>
+        p._id === editProduct._id ? res.product : p
+      )
+    );
+
+    setEditProduct(null);
+
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 
   return (
     <div className="p-6">
@@ -246,7 +264,7 @@ const AllProducts = () => {
 
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
 
-      <div className="bg-white/80 w-[1000px] max-w-[95%] rounded-sm shadow-2xl border border-gray-200 flex relative">
+      <div className="bg-white w-[1000px] max-w-[95%] rounded-sm shadow-2xl border border-gray-200 flex relative">
 
     {/* Close Button */}
 
@@ -264,7 +282,7 @@ const AllProducts = () => {
 
   {/* MAIN IMAGE */}
 
-  <div className="w-full flex justify-center bg-gray-50 p-4 rounded-lg shadow-sm">
+  <div className="w-full flex justify-center bg-gray-50 p-4 rounded-sm shadow-sm border border-gray-300">
     <img
       src={selectedImage || viewProduct.images[0]}
       alt={viewProduct.name}
@@ -377,239 +395,233 @@ const AllProducts = () => {
 
       {editProduct && (
 
-      <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50">
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
 
-  <div className="bg-white/80 backdrop-blur-lg w-[1000px] rounded-sm shadow-2xl p-8 relative">
+  <div className="bg-white w-[950px] max-h-[90vh] overflow-y-auto rounded-sm shadow-xl p-6 relative">
 
     {/* Close Button */}
     <button
       onClick={() => setEditProduct(null)}
-      className="absolute right-6 top-6 text-gray-500 hover:text-red-500"
+      className="absolute right-4 top-4 text-gray-500 hover:text-red-500"
     >
-      <X size={20} />
+      <X size={18} />
     </button>
 
-    <h2 className="text-2xl font-semibold mb-6">
+    <h2 className="text-lg font-semibold mb-5">
       Edit Product
     </h2>
 
-    <div className="grid grid-cols-2 gap-8">
+    <div className="grid grid-cols-2 gap-6">
 
       {/* LEFT SIDE IMAGES */}
-      <div className="mt-4">
+      <div>
 
-  <p className="text-sm font-medium text-gray-600 mb-3">
-    Product Images
-  </p>
+        <p className="text-xs text-gray-500 mb-3">
+          Product Images
+        </p>
 
-  <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-3">
 
-    {editProduct.images?.map((img, index) => (
-      <div
-        key={index}
-        className="relative h-[110px] rounded-lg overflow-hidden border border-gray-200 shadow-sm group"
-      >
+          {editProduct.images?.map((img, index) => (
+            <div
+              key={index}
+              className="relative h-[90px] rounded-sm overflow-hidden border border-gray-300 group"
+            >
 
-        <img
-          src={img}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
+              <img
+                src={typeof img === "string" ? img : URL.createObjectURL(img)}
+                className="w-full h-full object-cover"
+              />
 
-        {/* Overlay */}
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+                <span className="text-white text-[10px]">
+                  Change
+                </span>
+              </div>
 
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+              <input
+                type="file"
+                className="absolute inset-0 opacity-0 cursor-pointer"
+                onChange={(e) => handleImageChange(e, index)}
+              />
 
-          <span className="text-white text-xs font-medium">
-            Change Image
-          </span>
+            </div>
+          ))}
 
         </div>
-
-        <input
-          type="file"
-          className="absolute inset-0 opacity-0 cursor-pointer"
-          onChange={(e) => handleImageChange(e, index)}
-        />
-
-      </div>
-    ))}
-
-  </div>
 
       </div>
 
 
       {/* RIGHT SIDE FORM */}
-     <div className="space-y-5">
+      <div className="space-y-3 text-sm">
 
-  {/* Product Name */}
-  <div>
-    <label className="block text-sm font-medium text-gray-600 mb-1">
-      Product Name
-    </label>
+        {/* Product Name */}
+        <div>
+          <label className="text-xs text-gray-500">
+            Product Name
+          </label>
 
-    <input
-      type="text"
-      value={editProduct.name}
-      onChange={(e) =>
-        setEditProduct({
-          ...editProduct,
-          name: e.target.value
-        })
-      }
-      className="w-full border border-gray-200 rounded-md px-3 py-2 focus:ring-2 focus:ring-black focus:outline-none"
-      placeholder="Enter product name"
-    />
-  </div>
-
-
-  {/* Description */}
-  <div>
-    <label className="block text-sm font-medium text-gray-600 mb-1">
-      Description
-    </label>
-
-    <textarea
-      value={editProduct.description}
-      onChange={(e) =>
-        setEditProduct({
-          ...editProduct,
-          description: e.target.value
-        })
-      }
-      className="w-full border border-gray-200 rounded-md px-3 py-2 h-[100px] focus:ring-2 focus:ring-black focus:outline-none"
-      placeholder="Product description"
-    />
-  </div>
+          <input
+            type="text"
+            value={editProduct.name}
+            onChange={(e) =>
+              setEditProduct({
+                ...editProduct,
+                name: e.target.value
+              })
+            }
+            className="w-full border border-gray-300 rounded-sm p-2 text-sm focus:outline-none"
+          />
+        </div>
 
 
-  {/* Price + Stock */}
-  <div className="grid grid-cols-2 gap-4">
+        {/* Description */}
+        <div>
+          <label className="text-xs text-gray-500">
+            Description
+          </label>
 
-    <div>
-      <label className="block text-sm font-medium text-gray-600 mb-1">
-        Price
-      </label>
-
-      <input
-        type="number"
-        value={editProduct.price}
-        onChange={(e) =>
-          setEditProduct({
-            ...editProduct,
-            price: e.target.value
-          })
-        }
-        className="w-full border border-gray-200 rounded-md px-3 py-2 focus:ring-2 focus:ring-black focus:outline-none"
-      />
-    </div>
-
-    <div>
-      <label className="block text-sm font-medium text-gray-600 mb-1">
-        Stock
-      </label>
-
-      <input
-        type="number"
-        value={editProduct.stock}
-        onChange={(e) =>
-          setEditProduct({
-            ...editProduct,
-            stock: e.target.value
-          })
-        }
-        className="w-full border border-gray-200 rounded-md px-3 py-2 focus:ring-2 focus:ring-black focus:outline-none"
-      />
-    </div>
-
-  </div>
+          <textarea
+            value={editProduct.description}
+            onChange={(e) =>
+              setEditProduct({
+                ...editProduct,
+                description: e.target.value
+              })
+            }
+            className="w-full border border-gray-300 rounded-sm p-2 text-sm h-[70px] focus:outline-none"
+          />
+        </div>
 
 
-  {/* Category */}
-  <div>
-    <label className="block text-sm font-medium text-gray-600 mb-1">
-      Category
-    </label>
+        {/* Price + Stock */}
+        <div className="grid grid-cols-2 gap-3">
 
-    <select
-      value={editProduct.category}
-      onChange={(e) =>
-        setEditProduct({
-          ...editProduct,
-          category: e.target.value
-        })
-      }
-      className="w-full border border-gray-200 rounded-md px-3 py-2 focus:ring-2 focus:ring-black focus:outline-none"
-    >
+          <div>
+            <label className="text-xs text-gray-500">
+              Price
+            </label>
 
-      {categories?.map((cat) => (
-        <option key={cat._id} value={cat._id}>
-          {cat.name}
-        </option>
-      ))}
+            <input
+              type="number"
+              value={editProduct.price}
+              onChange={(e) =>
+                setEditProduct({
+                  ...editProduct,
+                  price: e.target.value
+                })
+              }
+              className="w-full border border-gray-300 rounded-sm p-2 text-sm focus:outline-none"
+            />
+          </div>
 
-    </select>
-  </div>
+          <div>
+            <label className="text-xs text-gray-500">
+              Stock
+            </label>
 
+            <input
+              type="number"
+              value={editProduct.stock}
+              onChange={(e) =>
+                setEditProduct({
+                  ...editProduct,
+                  stock: e.target.value
+                })
+              }
+              className="w-full border border-gray-300 rounded-sm p-2 text-sm focus:outline-none"
+            />
+          </div>
 
-  {/* Tags */}
-  <div>
-    <label className="block text-sm font-medium text-gray-600 mb-1">
-      Tags
-    </label>
-
-    <input
-      type="text"
-      value={editProduct.tags}
-      onChange={(e) =>
-        setEditProduct({
-          ...editProduct,
-          tags: e.target.value
-        })
-      }
-      placeholder="mobile, electronics, apple"
-      className="w-full border border-gray-200 rounded-md px-3 py-2 focus:ring-2 focus:ring-black focus:outline-none"
-    />
-  </div>
+        </div>
 
 
-  {/* Featured */}
-  <div className="flex items-center gap-2">
+        {/* Category */}
+        <div>
+          <label className="text-xs text-gray-500">
+            Category
+          </label>
 
-    <input
-      type="checkbox"
-      checked={editProduct.isFeatured}
-      onChange={(e) =>
-        setEditProduct({
-          ...editProduct,
-          isFeatured: e.target.checked
-        })
-      }
-    />
+          <select
+            value={editProduct.category.name}
+            onChange={(e) =>
+              setEditProduct({
+                ...editProduct,
+                category: e.target.value
+              })
+            }
+            className="w-full border border-gray-300 rounded-sm p-2 text-sm focus:outline-none"
+          >
+            {categories?.map((cat) => (
+              <option key={cat._id} value={cat._id}>
+                {cat.name}
+              </option>
+            ))}
 
-    <span className="text-sm text-gray-600">
-      Featured Product
-    </span>
-
-  </div>
+          </select>
+        </div>
 
 
-  {/* Update Button */}
-  <button
-    onClick={handleUpdate}
-    className="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800 transition font-medium"
-  >
-    Update Product
-  </button>
+        {/* Tags */}
+        <div>
+          <label className="text-xs text-gray-500">
+            Tags
+          </label>
 
-    </div>
+          <input
+            type="text"
+            value={editProduct.tags}
+            onChange={(e) =>
+              setEditProduct({
+                ...editProduct,
+                tags: e.target.value
+              })
+            }
+            className="w-full border border-gray-300 rounded-sm p-2 text-sm focus:outline-none"
+            placeholder="mobile, electronics"
+          />
+        </div>
 
+
+        {/* Featured */}
+        <div className="flex items-center gap-2 pt-1">
+
+          <input
+            type="checkbox"
+            checked={editProduct.isFeatured}
+            onChange={(e) =>
+              setEditProduct({
+                ...editProduct,
+                isFeatured: e.target.checked
+              })
+            }
+          />
+
+          <span className="text-xs text-gray-600">
+            Featured Product
+          </span>
+
+        </div>
+
+
+        {/* Update Button */}
+        <button
+          onClick={handleUpdate}
+          className="w-full bg-black text-white py-2 rounded-sm text-sm hover:bg-gray-800 transition mt-2"
+        >
+          Update Product
+        </button>
+
+      </div>
 
     </div>
 
   </div>
 
       </div>
+
       )}
 
     </div>

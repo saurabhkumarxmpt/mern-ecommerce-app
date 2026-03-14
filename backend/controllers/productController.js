@@ -185,55 +185,81 @@ exports.getAllProducts=async(req,res)=>{
     }
 }
 
-exports.updateProduct=async(req,res)=>{
-    try{
-        const{id}=req.params;
+exports.updateProduct = async (req, res) => {
+  try {
 
-        const {
-            name,
-            description,
-            price,
-            category,
-            isFeatured,
-            stock,
-            tags
-        } = req.body;
+    const { id } = req.params;
 
-        let product=await Product.findById(id);
+    let {
+      name,
+      description,
+      price,
+      category,
+      isFeatured,
+      stock,
+      tags
+    } = req.body;
 
-        if(!product){
-            return res.stats(404).json({message:"product not found"});
-        }
-
-        let images=product.images;
-
-        if(req.files && req.files.length > 0){
-            images=req.files.map(file => file.path)
-        }
-
-        product=await Product.findByIdAndUpdate(
-            id,
-            {
-            name,
-            description,
-            price,
-            category,
-            isFeatured,
-            stock,
-            tags,
-            images
-             },
-             {new:true}
-        );
-
-        return res.status(200).json({
-            message:"Product update successfully",
-            product
-        });
-    }catch(err){
-        res.status(500).json({message:err.message});
+    if (tags && typeof tags === "string") {
+      tags = tags.split(",");
     }
-}
+
+    let product = await Product.findById(id);
+
+    if (!product) {
+      return res.status(404).json({
+        message: "Product not found"
+      });
+    }
+
+    let images = [...product.images];
+
+    if (req.files && req.files.length > 0) {
+
+      req.files.forEach((file) => {
+
+        const parts = file.fieldname.split("_");
+
+        if (parts.length > 1) {
+          const index = parseInt(parts[1]);
+          images[index] = file.path;
+        }
+
+      });
+
+    }
+
+    product = await Product.findByIdAndUpdate(
+      id,
+      {
+        name,
+        description,
+        price,
+        category,
+        isFeatured,
+        stock,
+        tags,
+        images
+      },
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: "Product updated successfully",
+      product
+    });
+
+  } catch (err) {
+
+    console.log(err); // IMPORTANT
+
+    res.status(500).json({
+      message: err.message
+    });
+
+  }
+};
+
 
 
 exports.deleteProduct=async(req,res)=>{
