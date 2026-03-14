@@ -58,3 +58,31 @@ export const Allproducts=async()=>{
         console.error(err.message);
     }
 }
+
+export const updateProduct = async (id,productData)=>{
+    try{
+        const token=localStorage.getItem("adminToken");
+        const res=await API.put(`/product/update/${id}`,
+            productData,
+            {
+            headers:{
+                    "Content-Type": "multipart/form-data",
+                     Authorization: `Bearer ${token}`
+                }
+
+            }
+        );
+        return res.data;
+    }catch(err){
+        console.log(err.message);
+    }
+}
+
+export const deleteProduct = async (id) => {
+  try {
+    const res = await API.delete(`/product/delete-product/${id}`);
+    return res.data;
+  } catch (err) {
+    console.log("Delete Product Error:", err.message);
+  }
+};
