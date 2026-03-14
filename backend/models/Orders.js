@@ -49,7 +49,15 @@ const orderSchema = new mongoose.Schema({
 
   orderStatus: {
     type: String,
-    default: "Processing"
+    enum:[
+      "Processing",
+      "Packed",
+      "Shipped",
+      "Out for Delivery",
+      "Delivered",
+      "Cancelled"
+      ],
+    default:"Processing"
   }
 
 }, { timestamps: true });

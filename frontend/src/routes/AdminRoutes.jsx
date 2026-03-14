@@ -5,6 +5,7 @@ import AdminLayout from "../admin/components/AdminLayout";
 import Dashboard from "../admin/pages/Dashboard";
 import AllProducts from "../admin/pages/AllProducts";
 import AddProduct from "../admin/pages/AddProduct";
+import AllOrders from "../admin/pages/AllOrders";
 
 const AdminRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AdminRoutes = () => {
         <Route index element={<Dashboard />} />
         <Route path="all-products" element={<AllProducts/>} /> 
         <Route path='add-product' element={<AddProduct/> } />
+        <Route path='all-orders' element={<AllOrders/>} />
       </Route>
 
     </Routes>

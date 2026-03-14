@@ -28,8 +28,7 @@ const AdminSideBar = () => {
       icon: <FaBox />,
       children: [
         { name: "All Products", path: "all-products" },
-        { name: "Add Product", path: "add-product" },
-        { name: "Categorys", path: "/admin/dashboard/catgorys" }
+        { name: "Add Product", path: "add-product" }
       ]
     },
 
@@ -37,7 +36,7 @@ const AdminSideBar = () => {
       name: "Orders",
       icon: <FaShoppingCart />,
       children: [
-        { name: "All Orders", path: "/admin/orders" },
+        { name: "All Orders", path: "all-orders" },
         { name: "Pending Orders", path: "/admin/orders/pending" }
       ]
     },
