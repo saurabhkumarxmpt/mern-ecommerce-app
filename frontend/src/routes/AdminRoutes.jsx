@@ -7,7 +7,7 @@ import AllProducts from "../admin/pages/AllProducts";
 import AddProduct from "../admin/pages/AddProduct";
 import AllOrders from "../admin/pages/AllOrders";
 import TodayOrders from "../admin/pages/TodayOrders";
-
+import Category from "../admin/pages/Category";
 const AdminRoutes = () => {
   return (
     <Routes>
@@ -22,6 +22,7 @@ const AdminRoutes = () => {
         <Route path='add-product' element={<AddProduct/> } />
         <Route path='all-orders' element={<AllOrders/>} />
         <Route path='today-orders' element={<TodayOrders/>} />
+        <Route path='categories' element={<Category/>} />
       </Route>
 
     </Routes>

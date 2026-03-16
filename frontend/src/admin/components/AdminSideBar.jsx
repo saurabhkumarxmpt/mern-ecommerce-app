@@ -40,17 +40,15 @@ const AdminSideBar = () => {
         { name: "Today Orders", path: "today-orders" }
       ]
     },
-
+    {
+      name: "Categories",
+      icon: <FaTags />,
+      path:"categories"
+    },
     {
       name: "Users",
       path: "/admin/users",
       icon: <FaUsers />
-    },
-
-    {
-      name: "Categories",
-      path: "/admin/categories",
-      icon: <FaTags />
     }
   ];
 
