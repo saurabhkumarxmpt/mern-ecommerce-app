@@ -80,7 +80,7 @@ exports.getTodayOrders = async (req, res) => {
       }
     })
       .populate("user", "name email")
-      .populate("orderItems.product", "name price image")
+      .populate("orderItems.product", "name price image") 
       .sort({ createdAt: -1 });
 
     res.status(200).json({

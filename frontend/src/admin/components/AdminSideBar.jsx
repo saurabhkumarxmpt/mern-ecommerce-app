@@ -37,7 +37,7 @@ const AdminSideBar = () => {
       icon: <FaShoppingCart />,
       children: [
         { name: "All Orders", path: "all-orders" },
-        { name: "Pending Orders", path: "today-orders" }
+        { name: "Today Orders", path: "today-orders" }
       ]
     },
 
