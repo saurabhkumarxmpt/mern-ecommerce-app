@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Pencil, Trash2, PackageSearch, Eye, X } from "lucide-react";
 import { Allproducts, deleteProduct, updateProduct } from "../../services/ProductServices";
 import {Category} from '../../services/CategoryServices';
+import tost, { toast } from 'react-hot-toast';
 const AllProducts = () => {
 
   const [products, setProducts] = useState([]);
@@ -46,13 +47,17 @@ const AllProducts = () => {
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Delete this product?");
-    if (!confirmDelete) return;
-
+    if (!confirmDelete) {
+      toast.error("Deletion cancelled by user");
+     return;
+      }
     try {
       await deleteProduct(id);
+      toast.success("🗑️ Product deleted successfully!",{id:toastId});
       setProducts(products.filter((p) => p._id !== id));
     } catch (err) {
       console.log(err);
+      toast.error("Failed to delete product. Please try again.");
     }
   };
 
@@ -72,6 +77,7 @@ const AllProducts = () => {
 
 
   const handleUpdate = async () => {
+    const toastId = toast.loading("Updating product...");
   try {
 
     const formData = new FormData();
@@ -100,8 +106,13 @@ const AllProducts = () => {
 
     setEditProduct(null);
 
+    toast.success("Changes saved successfully.",{
+      id:toastId
+    });
+
   } catch (err) {
     console.log(err);
+    toast.error("Failed to update product. Try again!");
   }
 };
 

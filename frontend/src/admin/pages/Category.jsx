@@ -44,7 +44,7 @@ const Categories = () => {
       const res= await createCategory(formData);
       alert(res.message);
       setOpenAddModal(false);
-      getAllCategories()
+      getAllCategories();
     }catch(err){
       console.log(err);
     }

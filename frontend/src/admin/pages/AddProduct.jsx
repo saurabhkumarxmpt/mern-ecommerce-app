@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { UploadCloud, X } from "lucide-react";
 import { Category } from "../../services/CategoryServices";
 import { createProduct } from "../../services/ProductServices";
+import toast from "react-hot-toast";
 
 const AddProduct = () => {
 
   const [categories, setCategories] = useState([]);
   const [imagePreview, setImagePreview] = useState([]);
+  
 
   const [formData, setFormData] = useState({
     name: "",
@@ -93,6 +95,7 @@ const AddProduct = () => {
     }
 
     const productData = new FormData();
+    const toastId = toast.loading("Adding product...");
 
     productData.append("name", formData.name);
     productData.append("price", formData.price);
@@ -111,11 +114,10 @@ const AddProduct = () => {
 
       await createProduct(productData);
 
-      alert("Product added successfully");
-      console.log(productData);
-
+      toast.success("Your product has been added successfully!",{id:toastId});
     } catch (err) {
       console.log(err);
+      toast.error("Somthing went wrong!");
     }
 
   };
