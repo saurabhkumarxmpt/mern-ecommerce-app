@@ -1,13 +1,15 @@
 const express=require('express');
 const {
     createCategory,
-    getAllCategory
+    getAllCategory,
+    editCategory
 }=require('../controllers/categoryController');
 
 const router=express.Router();
 
-router.post('/create',createCategory);
 router.get('/',getAllCategory);
+router.post('/create',createCategory);
+router.put('/update/:id',editCategory);
 
 
 

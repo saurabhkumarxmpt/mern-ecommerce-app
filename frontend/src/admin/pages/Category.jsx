@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import { Eye, Hand, Pencil, Trash2 } from "lucide-react";
-import {Category,createCategory} from '../../services/CategoryServices';
-
+import {Category,createCategory,updateCategory} from '../../services/CategoryServices';
+import toast from
 const Categories = () => {
 
   const[category,setCategory]=useState([]);
@@ -49,6 +49,34 @@ const Categories = () => {
       console.log(err);
     }
   }
+  const handleUpdate = async () => {
+  const toastId = toast.loading("Updating category...");
+
+  try {
+    const res = await updateCategory(editCategory._id, {
+      name: editCategory.name,
+    });
+
+    // 🔥 UI update without refresh
+    setCategories((prev) =>
+      prev.map((cat) =>
+        cat._id === editCategory._id ? res.category : cat
+      )
+    );
+
+    toast.success("✏️ Category updated successfully!", {
+      id: toastId,
+    });
+
+    setEditCategory(null); // close modal
+
+  } catch (error) {
+    toast.error("Failed to update category!", {
+      id: toastId,
+    });
+  }
+};
+
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">

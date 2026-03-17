@@ -16,3 +16,10 @@ export const Category=async()=>{
         const responce=await API.get('/category');
         return responce.data;
 }
+
+//update the category
+
+export const updateCategory=async(id,data)=>{
+        const res=await API.put(`/category/update/${id}`,data);
+        return res.data;
+}
