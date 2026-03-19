@@ -93,7 +93,6 @@ const Categories = () => {
   }
 
   // ================= DELETE =================
-
   const handleDelete=async(id)=>{
 
     const confirmDelete=window.confirm("Delete this category?");

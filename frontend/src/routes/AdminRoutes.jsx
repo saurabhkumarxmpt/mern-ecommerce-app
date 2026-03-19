@@ -8,6 +8,8 @@ import AddProduct from "../admin/pages/AddProduct";
 import AllOrders from "../admin/pages/AllOrders";
 import TodayOrders from "../admin/pages/TodayOrders";
 import Category from "../admin/pages/Category";
+
+
 const AdminRoutes = () => {
   return (
     <Routes>

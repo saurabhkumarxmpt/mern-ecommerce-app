@@ -97,7 +97,8 @@ const AllProducts = () => {
     })
 
     const res = await updateProduct(editProduct._id, formData);
-
+    console.log(res);
+    
     setProducts(
       products.map((p) =>
         p._id === editProduct._id ? res.product : p

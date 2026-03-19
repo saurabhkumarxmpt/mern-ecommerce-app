@@ -35,8 +35,7 @@ exports.getAllCategory=async(req,res)=>{
     }
 }
 
-//edit category
-
+//Edit a single category
 exports.editCategory=async(req,res)=>{
     try{
         const {id}=req.params;
@@ -55,14 +54,14 @@ exports.editCategory=async(req,res)=>{
         );
 
         res.status(200).json({message:"category updated"});
+        
     }catch(err){
         res.status(500).json({message:err.message})
     }
 }
 
 
-//delete category
-
+//delete a single category
 exports.deleteCategory=async(req,res)=>{
     try{
         const{id}=req.params;

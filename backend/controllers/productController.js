@@ -251,11 +251,11 @@ exports.updateProduct = async (req, res) => {
 
   } catch (err) {
 
-    console.log(err); // IMPORTANT
-
+    console.error("ERROR 👉", err);
     res.status(500).json({
-      message: err.message
-    });
+    success: false,
+    message: err.message,
+  });
 
   }
 };

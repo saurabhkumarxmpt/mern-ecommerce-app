@@ -11,14 +11,13 @@ export const createCategory=async(formdata)=>{
         }
 }
 
-//get all Categories, path /api/category
+//get all Categories
 export const Category=async()=>{
         const responce=await API.get('/category');
         return responce.data;
 }
 
 //update the category
-
 export const updateCategory=async(id,data)=>{
         const res=await API.put(`/category/update/${id}`,data);
         return res.data;
@@ -26,8 +25,7 @@ export const updateCategory=async(id,data)=>{
 
 
 
-//delete category
-
+//delete the category
 export const deleteCategory=async(id)=>{
         const res=await API.delete(`/category/delete/${id}`);
         return res.data;

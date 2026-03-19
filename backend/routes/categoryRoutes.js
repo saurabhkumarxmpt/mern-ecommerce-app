@@ -5,14 +5,13 @@ const {
     editCategory,
     deleteCategory
 }=require('../controllers/categoryController');
-
 const router=express.Router();
 
-router.get('/',getAllCategory);
-router.post('/create',createCategory);
-router.put('/update/:id',editCategory);
-router.delete('/delete/:id',deleteCategory);
 
-
+//all Categories routes
+router.get('/',getAllCategory); //get all Categories
+router.post('/create',createCategory); //craete a category
+router.put('/update/:id',editCategory); //edit a category
+router.delete('/delete/:id',deleteCategory); //delete the category
 
 module.exports=router;
