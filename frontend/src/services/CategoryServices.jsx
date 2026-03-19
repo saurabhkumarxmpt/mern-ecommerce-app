@@ -23,3 +23,12 @@ export const updateCategory=async(id,data)=>{
         const res=await API.put(`/category/update/${id}`,data);
         return res.data;
 }
+
+
+
+//delete category
+
+export const deleteCategory=async(id)=>{
+        const res=await API.delete(`/category/delete/${id}`);
+        return res.data;
+}
