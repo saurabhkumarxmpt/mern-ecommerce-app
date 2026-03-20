@@ -3,6 +3,7 @@ import { Pencil, Trash2, PackageSearch, Eye, X } from "lucide-react";
 import { Allproducts, deleteProduct, updateProduct } from "../../services/ProductServices";
 import {Category} from '../../services/CategoryServices';
 import tost, { toast } from 'react-hot-toast';
+
 const AllProducts = () => {
 
   const [products, setProducts] = useState([]);
@@ -13,6 +14,7 @@ const AllProducts = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [categories, setCategories] = useState([]);
 
+
   useEffect(() => {
   if(viewProduct){
     setSelectedImage(viewProduct.images[0]);
@@ -20,6 +22,7 @@ const AllProducts = () => {
 }, [viewProduct]);
 
 
+  // fetch the all products
   const fetchProducts = async () => {
     try {
       const data = await Allproducts();
@@ -30,6 +33,7 @@ const AllProducts = () => {
       setLoading(false);
     }
   };
+
 
   const fetchCategories = async () => {
         try {
@@ -44,6 +48,7 @@ const AllProducts = () => {
     fetchProducts();
     fetchCategories();
   }, []);
+
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Delete this product?");
@@ -60,6 +65,8 @@ const AllProducts = () => {
       toast.error("Failed to delete product. Please try again.");
     }
   };
+
+  
 
  const handleImageChange = (e, index) => {
   const file = e.target.files[0];
@@ -106,7 +113,7 @@ const AllProducts = () => {
     );
 
     setEditProduct(null);
-
+    fetchProducts();
     toast.success("Changes saved successfully.",{
       id:toastId
     });

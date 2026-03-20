@@ -5,6 +5,7 @@ const AllOrders = () => {
 
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [loading,setLoading]=useState(true);
 
   const fetchOrders = async () => {
     try {
@@ -14,6 +15,8 @@ const AllOrders = () => {
 
     } catch (error) {
       console.log(error);
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -51,6 +54,11 @@ const AllOrders = () => {
 
       <div className="bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden">
 
+        {loading ? (
+          <div className="p-8 text-center text-gray-500">
+            Loading orders...
+          </div>
+        ):(
         <table className="w-full text-sm text-left">
 
           <thead className="bg-gray-50 text-gray-600">
@@ -193,6 +201,7 @@ const AllOrders = () => {
           </tbody>
 
         </table>
+        )}
 
       </div>
 

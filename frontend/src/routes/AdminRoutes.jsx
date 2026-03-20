@@ -8,7 +8,7 @@ import AddProduct from "../admin/pages/AddProduct";
 import AllOrders from "../admin/pages/AllOrders";
 import TodayOrders from "../admin/pages/TodayOrders";
 import Category from "../admin/pages/Category";
-
+import Users from "../admin/pages/UsersPage";
 
 const AdminRoutes = () => {
   return (
@@ -25,6 +25,7 @@ const AdminRoutes = () => {
         <Route path='all-orders' element={<AllOrders/>} />
         <Route path='today-orders' element={<TodayOrders/>} />
         <Route path='categories' element={<Category/>} />
+        <Route path='users' element={<Users/>} />
       </Route>
 
     </Routes>

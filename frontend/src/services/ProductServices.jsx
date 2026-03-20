@@ -1,5 +1,6 @@
 import API from './Api';
 
+//get the products by user searching
 export const GetProducts=async(params={})=>{
     const quiryString=new URLSearchParams(params).toString();
     const response=await API.get(`/product?${quiryString}`);
@@ -7,6 +8,7 @@ export const GetProducts=async(params={})=>{
 };
 
 
+//get a single product
 export const GetSingleProduct=async(id)=>{
     try{
         const response=await API.get(`/product/${id}`);
@@ -17,6 +19,7 @@ export const GetSingleProduct=async(id)=>{
     }
 }
 
+//get the related products on the product detail page
 export const GetRelatedProducts=async(id)=>{
     try{
         const response=await API.get(`/product/related/${id}`);
@@ -28,6 +31,7 @@ export const GetRelatedProducts=async(id)=>{
 }
 
 
+//create a new product by the only admin
 export const createProduct=async(productData)=>{
     try{
 
@@ -49,6 +53,8 @@ export const createProduct=async(productData)=>{
     }
 }
 
+
+//get the all products for the admin panal
 export const Allproducts=async()=>{
     try{
         const res=await API.get('/product/allproducts');
@@ -59,6 +65,8 @@ export const Allproducts=async()=>{
     }
 }
 
+
+//update the single product
 export const updateProduct = async (id,formData)=>{
     try{
         const token=localStorage.getItem("adminToken");
@@ -78,6 +86,8 @@ export const updateProduct = async (id,formData)=>{
     }
 }
 
+
+//delete the a single product
 export const deleteProduct = async (id) => {
   try {
     const res = await API.delete(`/product/delete-product/${id}`);

@@ -30,3 +30,8 @@ export const updateProfile=async (userData) =>{
 }
 
 
+export const getAllUsers=async()=>{
+    const res=await API.get("/user/allusers");
+     return res.data;
+}
+

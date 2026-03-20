@@ -7,7 +7,8 @@ const{
 
 const{
     getProfile,
-    updateProfile
+    updateProfile,
+    fetchAllusers
 }=require('../controllers/user/profileController');
 const {authMiddleware}=require('../middlewares/authMiddleware');
 
@@ -21,6 +22,6 @@ router.post('/login',loginUser);
 //User Profile
 router.get('/profile',authMiddleware,getProfile);
 router.put('/profile',authMiddleware,updateProfile);
-
+router.get('/allusers',fetchAllusers);
 
 module.exports=router;

@@ -47,7 +47,7 @@ const AdminSideBar = () => {
     },
     {
       name: "Users",
-      path: "/admin/users",
+      path: "users",
       icon: <FaUsers />
     }
   ];
