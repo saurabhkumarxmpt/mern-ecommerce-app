@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API=axios.create({
-    baseURL: "http://localhost:3000/api/admin"
+    baseURL: "https://mern-ecommerce-app-loau.onrender.com/api/admin"
 });
 
 API.interceptors.request.use((req) => {
