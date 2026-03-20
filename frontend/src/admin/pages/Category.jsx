@@ -98,7 +98,8 @@ const Categories = () => {
     const confirmDelete=window.confirm("Delete this category?");
 
     if(!confirmDelete){
-      toast.error("you cancel delete")
+      toast.error("you cancel delete");
+      return;
     }
 
     const toastId=toast.loading("Deleting category...");

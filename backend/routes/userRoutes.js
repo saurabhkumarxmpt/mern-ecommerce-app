@@ -2,13 +2,14 @@ const express=require('express');
 
 const{
     registerUser,
-    loginUser
+    loginUser,
+    fetchAllusers
     }=require('../controllers/user/authController');
 
 const{
     getProfile,
     updateProfile,
-    fetchAllusers
+    
 }=require('../controllers/user/profileController');
 const {authMiddleware}=require('../middlewares/authMiddleware');
 

@@ -7,8 +7,13 @@ const Users = () => {
   const fetchUsers = async () => {
     try {
       const res = await getAllUsers();
-      console.info(res);
-      setUsers(res.user || []);
+
+      // ❌ admin remove
+      const filteredUsers = res.users.filter(
+        (user) => user.role !== "admin"
+      );
+
+      setUsers(filteredUsers || []);
     } catch (error) {
       console.log(error);
     }
@@ -20,33 +25,66 @@ const Users = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">All Users</h2>
+      
+      {/* Header */}
+      <h2 className="text-2xl font-semibold text-gray-700 mb-6">
+        Users Overview
+      </h2>
 
-      <table className="w-full border">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="p-2">#</th>
-            <th className="p-2">Name</th>
-            <th className="p-2">Email</th>
-            <th className="p-2">Role</th>
-            <th className="p-2">Joined</th>
-          </tr>
-        </thead>
+      {/* Table Container */}
+      <div className="bg-gray-50 shadow-sm rounded-sm border border-gray-200 overflow-hidden">
 
-        <tbody>
-          {users.map((user, index) => (
-            <tr key={user._id} className="text-center border-t">
-              <td className="p-2">{index + 1}</td>
-              <td className="p-2">{user.name}</td>
-              <td className="p-2">{user.email}</td>
-              <td className="p-2">{user.role || "User"}</td>
-              <td className="p-2">
-                {new Date(user.createdAt).toLocaleDateString()}
-              </td>
+        <table className="w-full text-sm text-gray-600">
+          
+          {/* Table Head */}
+          <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
+            <tr>
+              <th className="p-3 text-left">#</th>
+              <th className="p-3 text-left">Name</th>
+              <th className="p-3 text-left">Email</th>
+              <th className="p-3 text-left">Role</th>
+              <th className="p-3 text-left">Joined</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          {/* Table Body */}
+          <tbody>
+            {users.map((user, index) => (
+              <tr
+                key={user._id}
+                className="border-t hover:bg-gray-100 border-gray-200 transition"
+              >
+                <td className="p-3">{index + 1}</td>
+
+                <td className="p-3 font-medium text-gray-800">
+                  {user.name}
+                </td>
+
+                <td className="p-3">{user.email}</td>
+
+                <td className="p-3">
+                  <span className="px-2 py-1 text-xs rounded-sm bg-green-100 text-green-600 font-medium">
+                    {user.role || "User"}
+                  </span>
+                </td>
+
+                <td className="p-3 text-gray-500">
+                  {new Date(user.createdAt).toLocaleDateString()}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+
+        </table>
+
+        {/* Empty State */}
+        {users.length === 0 && (
+          <div className="text-center py-6 text-gray-500">
+            No users found
+          </div>
+        )}
+
+      </div>
     </div>
   );
 };
