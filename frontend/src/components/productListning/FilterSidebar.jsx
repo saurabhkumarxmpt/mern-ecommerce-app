@@ -34,7 +34,7 @@ const FilterSidebar = ({
 
         {/* ================= CATEGORY ================= */}
         <div>
-          <h3 className="font-medium mb-3">Featured Categorys</h3>
+          <h3 className="font-medium mb-3">Featured Categories</h3>
           <div className="space-y-2">
             {categories?.slice(0, 8).map((cat) => (
               <button

@@ -39,7 +39,7 @@ const ProductListning = () => {
         max,
         tag
       });
-
+      
       const proCategory = await Category();
 
       setProducts(data.products);

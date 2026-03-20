@@ -114,41 +114,68 @@ exports.getSingleProduct=async(req,res)=>{
 
  
 // Get Products via user search
-exports.getProducts=async(req,res)=>{
-    try{
-        const {search,category,min,max,sort,tag}=req.query;
+const Category = require("../models/Category"); // ensure import
 
-        let filter={};
+exports.getProducts = async (req, res) => {
+    try {
+        const { search, category, min, max, sort, tag } = req.query;
 
+        let filter = {};
+
+        // 🔍 SEARCH (name + tags + category name)
         if (search) {
+            // category name search
+            const categories = await Category.find({
+                name: { $regex: search, $options: "i" }
+            });
+
+            const categoryIds = categories.map(cat => cat._id);
+
             filter.$or = [
                 { name: { $regex: search, $options: "i" } },
                 { tags: { $regex: search, $options: "i" } },
-                { category: {$regex: search, $options: "i"} }
-        ];
+                { category: { $in: categoryIds } }
+            ];
         }
 
-        if (category) filter.category = category;
-        if (tag) filter.tags = tag;
-
-        if (min && max) {
-            filter.price = { $gte: Number(min), $lte: Number(max) };
+        // 🎯 filter by specific category (dropdown etc.)
+        if (category) {
+            filter.category = category;
         }
 
+        // 🏷️ tag filter
+        if (tag) {
+            filter.tags = tag;
+        }
+
+        // 💰 price filter
+        if (min || max) {
+            filter.price = {};
+            if (min) filter.price.$gte = Number(min);
+            if (max) filter.price.$lte = Number(max);
+        }
+
+        // 🔃 sorting
         let sortOption = {};
         if (sort === "low") sortOption.price = 1;
         if (sort === "high") sortOption.price = -1;
 
-        const products=await Product.find(filter).sort(sortOption).populate("category", "name");
+        const products = await Product.find(filter)
+            .sort(sortOption)
+            .populate("category", "name");
+
         res.status(200).json({
-            count:products.length,
+            count: products.length,
             products
         });
 
-    }catch(err){
-        res.status(500).json({message:err.message})
+    } catch (err) {
+        console.error(err); // 🔥 important for debugging
+        res.status(500).json({ message: err.message });
     }
-}
+};
+
+
 
 
 //get the related products of the spacific category
@@ -164,7 +191,7 @@ exports.relatedProducts=async(req,res)=>{
 
     const relatedProducts=await Product.find({
         _id:{$ne: id},
-        category:currentProduct.category,
+        category:currentProduct.category?.name,
         tags:{$in:currentProduct.tags}
     }).limit(8).populate("category", "name");
 
