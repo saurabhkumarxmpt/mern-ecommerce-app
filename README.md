@@ -11,6 +11,7 @@ A full-stack **E-commerce web application** built using the **MERN stack** (Mong
 * 🛒 Add to Cart & Cart Management
 * 📦 Order Placement System
 * 🧑‍💼 Admin Panel (Manage Products, Users, Orders)
+* 📱 Responsive UI (Mobile Friendly)
 
 ---
 
