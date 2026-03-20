@@ -1,28 +1,60 @@
 const Order=require("../../models/Orders"); //import order schema
+const Product=require("../../models/Product");
 
 //create a new order
-exports.createOrder=async(req,res)=>{
-    try{
-        const {orderItems,shippingAddress,totalPrice}=req.body;
+exports.createOrder = async (req, res) => {
+    try {
+        const { orderItems, shippingAddress, totalPrice } = req.body;
 
-        if(orderItems.length === 0){
-            return res.status(400).json({message:"No order items"});
+        if (orderItems.length === 0) {
+            return res.status(400).json({ message: "No order items" });
         }
+        console.log(orderItems);
+        
+        for (let item of orderItems) {
 
-        const order= new Order({
-            user:req.user.id,
+    const qty = Number(item.qty || item.quantity);
+
+    if (!qty || qty <= 0) {
+        return res.status(400).json({ message: "Invalid quantity" });
+    }
+
+    const updatedProduct = await Product.findOneAndUpdate(
+        {
+            _id: item.product,
+            stock: { $gte: qty }
+        },
+        {
+            $inc: { stock: -qty }
+        },
+        { new: true }
+    );
+
+    if (!updatedProduct) {
+        return res.status(400).json({
+            message: "Product out of stock"
+        });
+    }
+}
+
+
+        const order = new Order({
+            user: req.user.id,
             orderItems,
             shippingAddress,
             totalPrice
         });
 
-        const createOrder=await order.save();
-        
+        const createOrder = await order.save();
+
         res.status(201).json(createOrder);
-    }catch(err){
-        res.status(500).json({message:err.message})
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: err.message });
     }
-}
+};
+
 
 
 //get the all order for users

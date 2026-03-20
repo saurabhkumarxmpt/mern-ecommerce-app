@@ -1,5 +1,5 @@
 const Product=require('../models/Product');
-
+const Category=require('../models/Category');
 //create a new product
 exports.createProduct=async(req,res)=>{
     try{
@@ -114,8 +114,6 @@ exports.getSingleProduct=async(req,res)=>{
 
  
 // Get Products via user search
-const Category = require("../models/Category"); // ensure import
-
 exports.getProducts = async (req, res) => {
     try {
         const { search, category, min, max, sort, tag } = req.query;
@@ -140,7 +138,16 @@ exports.getProducts = async (req, res) => {
 
         // 🎯 filter by specific category (dropdown etc.)
         if (category) {
-            filter.category = category;
+            const cat = await Category.findOne({
+                    name: { $regex: `^${category}$`, $options: "i" }
+                });
+
+                if (cat) {
+                    filter.category = cat._id;
+                } else {
+                    // agar category mile hi nahi to empty result bhej de
+                    return res.status(200).json({ count: 0, products: [] });
+                }
         }
 
         // 🏷️ tag filter
