@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
           {product.name}
         </h3>
 
-        <p className="text-sm text-gray-500">{product.category}</p>
+        <p className="text-sm text-gray-500">{product.category?.name}</p>
 
         {/* Price */}
         <div className="flex items-center gap-2">

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import slide1 from "../../assets/hero/slide1.png";
 import slide2 from "../../assets/hero/slide2.png";
 import slide3 from "../../assets/hero/slide3.png";
+import {Link} from "react-router-dom";
 
 const slides = [
   {
@@ -11,6 +12,7 @@ const slides = [
     highlight: "Collection 2026",
     desc: "Discover premium styles designed for comfort and confidence.",
     btn: "Shop Now",
+    category:"headphones"
   },
   {
     id: 2,
@@ -19,6 +21,7 @@ const slides = [
     highlight: "Next Gen Tech",
     desc: "Upgrade your lifestyle with innovative electronics.",
     btn: "Explore Now",
+    category:'laptops'
   },
   {
     id: 3,
@@ -27,6 +30,7 @@ const slides = [
     highlight: "Luxury Living",
     desc: "Make your home elegant with trending decor.",
     btn: "Browse Items",
+    category:"mouses"
   },
 ];
 
@@ -67,9 +71,11 @@ const HeroSlider = () => {
                 {slide.desc}
               </p>
 
+              <Link to={`/products?category=${slide.category}`}>
               <button className="mt-6 bg-green-600 text-white px-7 py-3 rounded-full hover:bg-green-700 transition duration-300 shadow-md">
                 {slide.btn}
               </button>
+              </Link>
             </div>
 
             {/* Right Image */}

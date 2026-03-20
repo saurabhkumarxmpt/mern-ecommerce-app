@@ -26,7 +26,7 @@ const RightSideDetails = ({ product }) => {
 
       {/* Category */}
       <p className="text-green-600 text-sm font-medium">
-        Category: {product.category}
+        Category: {product.category?.name}
       </p>
 
       {/* Tags */}

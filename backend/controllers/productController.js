@@ -52,6 +52,7 @@ exports.getProductsByCategory=async(req,res)=>{
         const {category}=req.params;
         
         const products=await Product.findOne({category})
+        .populate("category", "name")
         .limit(20)
         .select("name price images");
 
@@ -67,10 +68,12 @@ exports.getProductsByCategory=async(req,res)=>{
 exports.getHomePageProducts=async(req,res)=>{
     try{
         const featured =await Product.find({isFeatured: true})
+        .populate("category", "name")
         .limit(8)
         .select("name price images category");
         
         const latest=await Product.find()
+        .populate("category", "name")
         .sort({createdAt: -1 })
         .limit(4)
         .select("name price images category");
@@ -93,7 +96,7 @@ exports.getSingleProduct=async(req,res)=>{
 
         const {id}=req.params;
 
-        const product=await Product.findById(id);
+        const product=await Product.findById(id).populate("category", "name");
 
         if(!product){
             return res.status(404).json({
@@ -136,7 +139,7 @@ exports.getProducts=async(req,res)=>{
         if (sort === "low") sortOption.price = 1;
         if (sort === "high") sortOption.price = -1;
 
-        const products=await Product.find(filter).sort(sortOption);
+        const products=await Product.find(filter).sort(sortOption).populate("category", "name");
         res.status(200).json({
             count:products.length,
             products
@@ -163,7 +166,7 @@ exports.relatedProducts=async(req,res)=>{
         _id:{$ne: id},
         category:currentProduct.category,
         tags:{$in:currentProduct.tags}
-    }).limit(8);
+    }).limit(8).populate("category", "name");
 
     res.json(relatedProducts);
 }

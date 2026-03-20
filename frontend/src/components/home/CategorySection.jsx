@@ -5,11 +5,12 @@ import { Category } from "../../services/CategoryServices";
 
 const categoryIcons = {
   I_phone: "📱",
-  men: "👗",
+  music: "🎧",
   gaming: "👟",
-  Beauty: "💄",
-  Books: "📚",
-  Sports: "⚽",
+  woman: "💄",
+  speekers: "💿",
+  laptops: "💻",
+  mobile:"📱"
 };
 const CategorySection = () => {
   const scrollRef = useRef(null);

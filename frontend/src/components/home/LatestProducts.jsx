@@ -106,8 +106,12 @@ const NewArrivals = () => {
                   className="w-24 h-24 object-cover rounded"
                 />
                 <div>
-                  <h4 className="font-medium text-gray-700">{item.name}</h4>
-                  <p className="text-green-500 text-sm">category/{item.category}</p>
+                  <h4 className="font-medium text-gray-700">
+                  {item.name.length > 60 
+                        ? item.name.slice(0, 60) + "..." 
+                        : item.name}
+                        </h4>
+                  <p className="text-green-500 text-sm">category/{item.category?.name}</p>
                   <p className="font-md text-md">Rs.{item.price}/-</p>
                 </div>
               </div>

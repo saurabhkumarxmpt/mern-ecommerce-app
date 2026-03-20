@@ -65,12 +65,16 @@ const FeaturedProducts = () => {
               </div>
               
 
-              <h3 className="text-sm font-medium mb-2">
-                {product.name}
+              <h3 
+              className="text-sm font-medium mb-2 w-[200px]"
+              >
+               {product.name.length > 60 
+                  ? product.name.slice(0, 60) + "..." 
+                  : product.name}
               </h3>
               </Link>
-              <Link to={`/products?category=${product.category}`}>
-              <p className="text-[13px] py-1 text-green-600 hover:underline">category/{product.category}</p>
+              <Link to={`/products?category=${product.category?.name}`}>
+              <p className="text-[13px] py-1 text-green-600 hover:underline">category/{product.category?.name}</p>
               </Link>
 
               <p className="font-semibold text-gray-800 mb-3">
