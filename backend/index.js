@@ -9,7 +9,10 @@ const cors=require('cors');
 
 app.use(express.json());
 database();
-app.use(cors());
+app.use(cors({
+  origin: "https://mern-ecommerce-app-sandy.vercel.app/",
+  credentials: true
+}));
 app.use('/api',routes);
 app.use('/api/admin',adminRoutes);
 app.get('/',(req,res)=>{
