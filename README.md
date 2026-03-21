@@ -68,15 +68,15 @@ JWT Authentication, REST APIs
 
 ### Product Page
 
-![Product](./screenshots/product.png)
+![Product](./frontend/src/assets/screenshots/product.png)
 
 ### Cart Page
 
-![Cart](./screenshots/cart.png)
+![Cart](./frontend/src/assets/screenshots/cart.png)
 
 ### Admin Dashboard
 
-![Admin](./screenshots/admin.png)
+![Admin](./frontend/src/assets/screenshots/admin.png)
 
 ---
 
