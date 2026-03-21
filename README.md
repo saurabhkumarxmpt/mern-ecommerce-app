@@ -2,13 +2,12 @@
 
 A full-stack E-commerce web application built using the MERN stack. The platform enables users to explore products, manage carts, and place orders securely, while providing an admin dashboard for complete store management.
 
----
 
 ## Live Demo
 
 https://mern-ecommerce-app-sandy.vercel.app/
 
----
+
 
 ## Key Highlights
 
@@ -18,7 +17,7 @@ https://mern-ecommerce-app-sandy.vercel.app/
 * Developed a complete cart and order management system
 * Created an admin dashboard to manage products, users, and orders
 
----
+
 
 ## Features
 
@@ -33,7 +32,7 @@ https://mern-ecommerce-app-sandy.vercel.app/
 * User management
 * Order tracking
 
----
+
 
 ## Tech Stack
 
@@ -49,7 +48,7 @@ MongoDB
 **Other:**
 JWT Authentication, REST APIs
 
----
+
 
 ## Project Architecture
 
@@ -58,7 +57,7 @@ JWT Authentication, REST APIs
 * State management using React hooks
 * Secure authentication flow using tokens
 
----
+
 
 ## Screenshots
 
@@ -78,7 +77,7 @@ JWT Authentication, REST APIs
 
 ![Admin](./frontend/src/assets/screenshots/admin.png)
 
----
+
 
 ## Future Enhancements
 
@@ -88,7 +87,6 @@ JWT Authentication, REST APIs
 * Email notifications and alerts
 
 ---
-
 ## Author
 
 Saurabh Kumar
