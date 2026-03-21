@@ -64,7 +64,7 @@ JWT Authentication, REST APIs
 
 ### Home Page
 
-![Home](./screenshots/home.png)
+![Home](./frontend/src/assets/screenshots/home.png)
 
 ### Product Page
 
