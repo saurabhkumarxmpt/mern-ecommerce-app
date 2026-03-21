@@ -1,134 +1,95 @@
-# 🛒 E-Cart (MERN E-commerce App)
+# E-Cart — MERN E-commerce Application
 
-A full-stack **E-commerce web application** built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js). This project allows users to browse products, add items to cart, and place orders with secure authentication.
-
----
-
-## 🚀 Features
-
-* 🔐 User Authentication (JWT आधारित login/signup)
-* 🛍️ Product Listing & Filtering
-* 🛒 Add to Cart & Cart Management
-* 📦 Order Placement System
-* 🧑‍💼 Admin Panel (Manage Products, Users, Orders)
-* 📱 Responsive UI (Mobile Friendly)
+A full-stack E-commerce web application built using the MERN stack. The platform enables users to explore products, manage carts, and place orders securely, while providing an admin dashboard for complete store management.
 
 ---
 
-## 🛠️ Tech Stack
+## Live Demo
+
+https://mern-ecommerce-app-sandy.vercel.app/
+
+---
+
+## Key Highlights
+
+* Implemented secure user authentication using JWT
+* Designed a responsive and user-friendly UI with React and Tailwind CSS
+* Built RESTful APIs for scalable backend architecture
+* Developed a complete cart and order management system
+* Created an admin dashboard to manage products, users, and orders
+
+---
+
+## Features
+
+* User Signup and Login with authentication
+* Product browsing with filtering
+* Add to cart and cart management
+* Order placement workflow
+
+### Admin Panel
+
+* Product management
+* User management
+* Order tracking
+
+---
+
+## Tech Stack
 
 **Frontend:**
-
-* React.js
-* Tailwind CSS
+React.js, Tailwind CSS
 
 **Backend:**
-
-* Node.js
-* Express.js
+Node.js, Express.js
 
 **Database:**
-
-* MongoDB
+MongoDB
 
 **Other:**
-
-* JWT Authentication
-* REST API
+JWT Authentication, REST APIs
 
 ---
 
-## 🌐 Live Demo
+## Project Architecture
 
-👉 https://mern-ecommerce-app-sandy.vercel.app/
-
----
-
-## ⚙️ Installation & Setup
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
-```
-
-### 2. Install dependencies
-
-**Backend:**
-
-```bash
-cd backend
-npm install
-```
-
-**Frontend:**
-
-```bash
-cd frontend
-npm install
-```
+* Modular backend structure (routes, controllers, models)
+* REST API integration with frontend
+* State management using React hooks
+* Secure authentication flow using tokens
 
 ---
 
-### 3. Environment Variables
+## Screenshots
 
-Create a `.env` file in backend folder and add:
+### Home Page
 
-```env
-PORT=5000
-MONGO_URI=your_mongodb_connection
-JWT_SECRET=your_secret_key
-```
+![Home](./screenshots/home.png)
 
----
+### Product Page
 
-### 4. Run the app
+![Product](./screenshots/product.png)
 
-**Backend:**
+### Cart Page
 
-```bash
-npm run dev
-```
+![Cart](./screenshots/cart.png)
 
-**Frontend:**
+### Admin Dashboard
 
-```bash
-npm run dev
-```
+![Admin](./screenshots/admin.png)
 
 ---
 
-## 📸 Screenshots
+## Future Enhancements
 
-*Add your project screenshots here (Home Page, Cart, Admin Panel, etc.)*
-
----
-
-## 📌 Future Improvements
-
-* 💳 Online Payment Integration (Stripe/Razorpay)
-* 📦 Order Tracking
-* ⭐ Product Reviews & Ratings
-* 📧 Email Notifications
+* Payment gateway integration (Stripe / Razorpay)
+* Order tracking system
+* Product reviews and ratings
+* Email notifications and alerts
 
 ---
 
-## 🤝 Contributing
+## Author
 
-Contributions are welcome! Feel free to fork this repo and submit a pull request.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## 🙌 Author
-
-**Saurabh Kumar**
-Frontend Developer | MERN Stack Enthusiast
-
----
+Saurabh Kumar
+MERN Stack Developer
